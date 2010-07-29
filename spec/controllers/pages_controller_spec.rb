@@ -4,7 +4,7 @@ describe PagesController do
   integrate_views
 
   before(:each) do
-    @base_title = "Journalous"
+    @base_title = "Memoirable"
   end
 
   describe "GET 'home'" do
@@ -27,7 +27,7 @@ describe PagesController do
 
     it "should have the right title" do
       get 'contact'
-      response.should have_tag("title", @base_title + " | Home")
+      response.should have_tag("title", @base_title + " | Contact")
     end
   end
 
@@ -39,7 +39,7 @@ describe PagesController do
 
     it "should have the right title" do
       get 'about'
-      response.should have_tag("title", @base_title + " | Home")
+      response.should have_tag("title", @base_title + " | About")
     end
   end
 
