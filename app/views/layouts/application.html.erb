@@ -2,11 +2,21 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Memorate | <%= @title %></title>
+    <title>Memoirable | <%= @title %></title>
     <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
     <%= stylesheet_link_tag 'blueprint/print', :media => 'print' %>
+    <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
+    <%= stylesheet_link_tag 'memoirable', :media => 'screen' %>
+    <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Vollkorn' %>
   </head>
   <body>
-    <%= yield %>
+    <div class="container">
+      <header>
+	<div id="logo">memoirable</div>
+      </header>
+      <section>
+	<%= yield %>
+      </section>
+    </div>
   </body>
 </html>

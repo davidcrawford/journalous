@@ -1,0 +1,33 @@
+body {
+      font-family: 'Vollkorn', serif;
+}
+
+#logo {
+      letter-spacing: 0.065em;
+      font-size: 40px;
+}
+
+header {
+       border-bottom: 4px solid black;
+}
+
+#question {
+  font-size: 54px;
+  margin: 18px 0;
+}
+
+#buttons {
+  margin: 0;
+  padding: 0;
+}
+
+#buttons li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0.2em 0;
+}
+
+.big-button {
+  font-size: 36px;
+  padding: 9px;
+}
