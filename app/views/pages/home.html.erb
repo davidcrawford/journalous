@@ -1,5 +1,8 @@
-<div id="question">What's your favorite memory of your father?</div>
+<div id="question">What is your favorite childhood memory?</div>
+<form action="#">
+    <textarea id="answer-box" class="span-24" style="display: none"></textarea>
+</form>
 <ul id="buttons">
-  <li><button id="answer-button" class="big-button">Answer</button></li>
+  <li><button id="answer-button" class="big-button" onclick="$('#buttons').fadeOut(100, function() {$('#answer-box').slideDown() })">Answer</button></li>
   <li><button id="skip-button" class="big-button">Skip &raquo;</button></li>
 </ul>

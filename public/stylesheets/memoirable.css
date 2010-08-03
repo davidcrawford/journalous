@@ -9,6 +9,8 @@ body {
 
 header {
        border-bottom: 4px solid black;
+    background-color: #FFFEC6;
+    padding: 0px 9px;
 }
 
 #question {
@@ -17,17 +19,22 @@ header {
 }
 
 #buttons {
-  margin: 0;
+  bottom: 0;
+  margin: 36px 0;
   padding: 0;
+  position: fixed;
 }
 
 #buttons li {
   list-style-type: none;
   display: inline-block;
   padding: 0.2em 0;
+  margin: 0 0.2em 0 0;
 }
 
 .big-button {
   font-size: 36px;
   padding: 9px;
+  font-family: 'Vollkorn', serif;
+}
 }

@@ -1,0 +1,24 @@
+# == Schema Information
+# Schema version: 20100729042959
+#
+# Table name: prompts
+#
+#  id           :integer         not null, primary key
+#  text         :string(255)
+#  quote        :string(255)
+#  quote_author :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  text: MyString
+  quote: MyString
+  quote_author: MyString
+
+two:
+  text: MyString
+  quote: MyString
+  quote_author: MyString
