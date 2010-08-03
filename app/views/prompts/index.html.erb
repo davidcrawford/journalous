@@ -6,9 +6,9 @@
 
 <% @prompts.each do |prompt| %>
   <tr>
-    <td><%=h outfit_pair.text %></td>
-    <td><%=h outfit_pair.quote %></td>
-    <td><%=h outfit_pair.quote_author %></td>
+    <td><%=h prompt.text %></td>
+    <td><%=h prompt.quote %></td>
+    <td><%=h prompt.quote_author %></td>
     <td><%= link_to 'Show', prompt %></td>
     <td><%= link_to 'Edit', edit_prompt_path(prompt) %></td>
     <td><%= link_to 'Destroy', prompt, :confirm => 'Are you sure?', :method => :delete %></td>

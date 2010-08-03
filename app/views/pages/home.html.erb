@@ -1,8 +1,48 @@
-<div id="question">What is your favorite childhood memory?</div>
-<form action="#">
-    <textarea id="answer-box" class="span-24" style="display: none"></textarea>
+<% default_text = "Type here to tell your story..." %>
+<div id="question-window">
+  <ul id="questions">
+    <li class="question span-24 last">What is your favorite childhood memory?</li>
+    <li class="question span-24 last">What did you do in the summers as a child?</li>
+    <li class="question span-24 last">What is your favorite childhood memory?</li>
+  </ul>
+</div>
+<form id="answer-box" style="display:none" class="span-24 last" action="#">
+    <textarea id="answer-box-textarea" class="span-23 last default-text"><%= default_text %></textarea>
+    <div class="prepend-15 span-9 last">
+      <ul id="save-cancel" class="button-set">
+	<li><button id="cancel" class="big-button">Cancel</button></li>
+	<li><button id="save" class="big-button">Save</button></li>
+      </ul>
+    </div>
 </form>
-<ul id="buttons">
-  <li><button id="answer-button" class="big-button" onclick="$('#buttons').fadeOut(100, function() {$('#answer-box').slideDown() })">Answer</button></li>
+<div id="buttons" class="span-24 last">
+<ul class="button-set span-4">
+  <li><button id="back-button" style="display: none" class="big-button">&laquo; Back</button></li>
+</ul>
+<ul id="answer-skip" class="button-set span-20 last">
+  <li><button id="answer-button" class="big-button">Answer</button></li>
   <li><button id="skip-button" class="big-button">Skip &raquo;</button></li>
 </ul>
+</div>
+<script type="text/javascript">
+$(function() {
+  $('#answer-button').click(function() {
+    $('#buttons').fadeOut(100, function() {
+      $('#answer-box').slideDown(200);
+    });
+  });
+  $('#answer-box-textarea').focus(function() {
+    if ($(this).html() === '<%= default_text %>') {
+      $(this).html('');
+    }
+    $(this).removeClass('default-text');
+  });
+  $('#skip-button').click(function() {
+    $('#back-button').show();
+    $('#questions').animate({marginLeft: "-=" + $('.question').width()});
+  });
+  $('#back-button').click(function() {
+    $('#questions').animate({marginLeft: "+=" + $('.question').width()});
+  });
+});
+</script>
