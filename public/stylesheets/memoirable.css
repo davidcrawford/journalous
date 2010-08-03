@@ -9,6 +9,8 @@ body {
 
 header {
        border-bottom: 4px solid black;
+    background-color: #FFFEC6;
+    padding: 0px 9px;
 }
 
 #question {
@@ -33,4 +35,6 @@ header {
 .big-button {
   font-size: 36px;
   padding: 9px;
+  font-family: 'Vollkorn', serif;
+}
 }
