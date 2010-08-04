@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   def home
     @title = "Home"
+    @prompts = Prompt.all
   end
 
   def contact

@@ -1,0 +1,14 @@
+#!/usr/bin/ruby
+
+require 'rubygems'
+require 'rest_client'
+require 'json'
+
+prompts = File.open("prompts", "r")
+
+url = 'http://localhost:3000'
+prompts.each { |line|
+  text = line.split(',')[0]
+  RestClient.post url + "/prompts", {:prompt => { :text => text } }.to_json, :content_type => :json
+}
+

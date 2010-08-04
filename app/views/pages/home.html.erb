@@ -1,9 +1,9 @@
 <% default_text = "Type here to tell your story..." %>
 <div id="question-window">
   <ul id="questions">
-    <li class="question span-24 last">What is your favorite childhood memory?</li>
-    <li class="question span-24 last">What did you do in the summers as a child?</li>
-    <li class="question span-24 last">What is your favorite childhood memory?</li>
+  <% @prompts.each { |prompt| %>
+    <li class="question span-24 last"><%= prompt.text %></li>
+  <% } %>
   </ul>
 </div>
 <form id="answer-box" style="display:none" class="span-24 last" action="#">
@@ -16,12 +16,15 @@
     </div>
 </form>
 <div id="buttons" class="span-24 last">
-<ul class="button-set span-4">
-  <li><button id="back-button" style="display: none" class="big-button">&laquo; Back</button></li>
+<ul class="button-set span-2">
+  <li><button id="back-button" style="display: none" class="big-button span-2">&laquo;</button></li>
 </ul>
-<ul id="answer-skip" class="button-set span-20 last">
+<ul id="answer-see-more" class="button-set span-20 last">
   <li><button id="answer-button" class="big-button">Answer</button></li>
-  <li><button id="skip-button" class="big-button">Skip &raquo;</button></li>
+  <li><button id="see-more-button" class="big-button">See More</button></li>
+</ul>
+<ul class="button-set span-2 last">
+  <li><button id="skip-button" class="big-button span-2">&raquo;</button></li>
 </ul>
 </div>
 <script type="text/javascript">
