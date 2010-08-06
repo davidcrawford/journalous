@@ -79,6 +79,7 @@ ul li {
     margin-bottom: 9px;
     cursor: pointer;
     padding: 0 9px 9px;
+    border-radius: 6px;
 }
 
 .num-questions:hover {
