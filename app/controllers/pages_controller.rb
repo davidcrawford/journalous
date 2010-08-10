@@ -4,6 +4,11 @@ class PagesController < ApplicationController
     @prompts = Prompt.all
   end
 
+  def list
+    @title = "Home"
+    @prompts = Prompt.all
+  end
+
   def contact
     @title = "Contact"
   end
