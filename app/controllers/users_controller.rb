@@ -1,3 +1,5 @@
+# require 'B62'
+
 class UsersController < ApplicationController
 
   def show
@@ -28,7 +30,8 @@ class UsersController < ApplicationController
   private
     
     def generate_password
-      return "awesomepass"
+       pass = B62.encode(rand(10000000000) + 100000000)
+       return pass
     end
 end
 
