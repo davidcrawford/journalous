@@ -1,15 +1,17 @@
-<div>
-<p>Capture a <span class="loud">memorable</span> life.</p>
-<p>Get <span class="loud">memoirable</span>.</p>
-</div>
+<div id="signup-content">
+<h1>Capture a <span class="loud">memorable</span> life.</h1>
+<h1>Get <span class="loud">memoirable</span>.</h1>
 <div id="signup-form">
-  <p>Enter your email address to get started.</p>
 <% form_for(@user) do |f| %>
+  <label>Enter your email address to get started.</label>
+  <%= f.error_messages %>
   <div class = "field">
     <%= f.text_field :email %>
   </div>
   <div class="actions">
-    <%= f.submit "Begin" %>
+    <button class="big-button">Begin</button>
+    <%= f.submit "Begin" if false %>
   </div>
 <% end %>
+</div>
 </div>
