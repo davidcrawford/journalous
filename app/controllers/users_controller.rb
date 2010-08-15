@@ -1,5 +1,3 @@
-# require 'B62'
-
 class UsersController < ApplicationController
 
   def show
@@ -19,6 +17,11 @@ class UsersController < ApplicationController
     }))
     if @user.save
       # Handle success
+      # Send password
+      Email.send params[:user][:email], :from => "notify@memoirable.com",
+                                        :subject => "Welcome to memoirable!",
+                                        :body => "Thanks for joining!  Here's your password: #{password}"
+      
       # Log the user in
       redirect_to :controller => 'pages', :action => 'list'
     else
