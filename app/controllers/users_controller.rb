@@ -22,7 +22,7 @@ class UsersController < ApplicationController
                                         :subject => "Welcome to memoirable!",
                                         :body => "Thanks for joining!  Here's your password: #{password}"
       
-      # Log the user in
+      sign_in @user
       redirect_to :controller => 'pages', :action => 'list'
     else
       @title = "Sign up"

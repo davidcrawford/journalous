@@ -2,9 +2,11 @@ body {
   font-family: 'Vollkorn', serif;
 }
 
-#logo {
+#logo a {
   letter-spacing: 0.065em;
   font-size: 40px;
+  color: black;
+  text-decoration: none;
 }
 
 header {
