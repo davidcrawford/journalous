@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.signout '/signout', :controller => 'sessions', :action => 'destroy'
   map.signup '/signup', :controller => 'users', :action => 'new'
 
-  map.prompts '/prompts', :controller => 'pages', :action => 'list'
+  map.home '/home', :controller => 'pages', :action => 'list'
   map.root :controller => 'pages', :action => 'home'
 
   # The priority is based upon order of creation: first created -> highest priority.

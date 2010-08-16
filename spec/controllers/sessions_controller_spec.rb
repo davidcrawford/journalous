@@ -56,9 +56,9 @@ describe SessionsController do
         controller.should be_signed_in
       end
       
-      it "should redirect to the prompts page" do
+      it "should redirect to the home page" do
         post :create, :session => @attr
-        redirect_to prompts_path
+        redirect_to home_path
       end
     end
   end

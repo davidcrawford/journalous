@@ -13,7 +13,14 @@
   <body>
     <div class="container">
       <header>
-	<div id="logo"><%= link_to "memoirable", root_path %></div>
+	      <span id="logo"><%= link_to "memoirable", root_path %></span>
+        <ul id="header-links">
+          <% if signed_in? %>
+            <li><%= link_to "Sign out", signout_path %></li>
+          <% else %>
+            <li><%= link_to "Sign in", signin_path %></li>
+          <% end %>
+        </ul>
       </header>
       <section>
         <% flash.each do |key, value| %>

@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     else
       # Log 'em in
       sign_in user
-      redirect_to prompts_path
+      redirect_to home_path
     end
   end
 
