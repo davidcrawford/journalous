@@ -139,5 +139,16 @@ describe User do
       @user.remember_token.should_not be_nil
     end
   end
+  
+  describe "answers" do
+    
+    before(:each) do
+      @user = User.create!(@attr)
+    end
+    
+    it "should have answers" do
+      @user.should respond_to(:answers)
+    end
+  end
 end
 

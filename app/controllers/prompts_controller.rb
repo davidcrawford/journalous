@@ -1,4 +1,6 @@
 class PromptsController < ApplicationController
+  before_filter :authenticate
+  
   # GET /prompts
   # GET /prompts.xml
   def index

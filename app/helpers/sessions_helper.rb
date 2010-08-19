@@ -1,4 +1,7 @@
 module SessionsHelper
+  def authenticate
+    deny_access unless signed_in?
+  end
   
   def sign_in(user)
     user.remember_me!
@@ -36,5 +39,10 @@ module SessionsHelper
   def redirect_back_or default
     redirect_to(session[:return_path] || default)
     session[:return_path] = nil
+  end
+  
+  def deny_access
+    flash[:error] = "Please sign in"
+    redirect_to signin_path
   end
 end

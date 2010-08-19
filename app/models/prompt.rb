@@ -13,4 +13,6 @@
 
 class Prompt < ActiveRecord::Base
   attr_accessible :text, :quote, :quote_author
+  
+  has_many :answers
 end

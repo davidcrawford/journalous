@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
     attr_accessor :password
     attr_accessible :name, :email, :password, :password_confirmation
     
+    has_many :answers
+    
     validates_presence_of :email, :password
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
     validates_uniqueness_of :email
@@ -39,6 +41,12 @@ class User < ActiveRecord::Base
     def remember_me!
       self.remember_token = encrypt("#{salt}--#{id}--#{Time.now.utc}")
       save_without_validation
+    end
+    
+    def answer prompt, content
+      answer = self.answers.build({ :content => content })
+      prompt.answers << answer
+      return answer
     end
     
     private

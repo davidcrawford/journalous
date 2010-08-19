@@ -6,3 +6,6 @@ Factory.define :user do |user|
   user.password_confirmation "foobar"
 end
 
+Factory.define :prompt do |prompt|
+  prompt.text "What is your favorite color?"
+end

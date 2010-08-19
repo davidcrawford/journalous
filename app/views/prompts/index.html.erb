@@ -1,21 +1,66 @@
-<h1>Listing prompts</h1>
-
-<table>
-  <tr>
-  </tr>
-
-<% @prompts.each do |prompt| %>
-  <tr>
-    <td><%=h prompt.text %></td>
-    <td><%=h prompt.quote %></td>
-    <td><%=h prompt.quote_author %></td>
-    <td><%= link_to 'Show', prompt %></td>
-    <td><%= link_to 'Edit', edit_prompt_path(prompt) %></td>
-    <td><%= link_to 'Destroy', prompt, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New prompt', new_prompt_path %>
+<% default_text = "Type here to tell your story..." %>
+  <div id="top-bar" style="display: none">
+    <a href="#">See your work in progress</a>
+  </div>
+  <div id="sidebar" class="span-4">
+    <div id="not-started" class="num-questions num-questions-selected">
+      <div class="answered-number">23</div>
+      <div class="answered-label">unanswered questions</div>
+    </div>
+    <div id="drafts" class="num-questions">
+      <div class="answered-number">0</div>
+      <div class="answered-label">drafts started</div>
+    </div>
+    <div id="finished" class="num-questions">
+      <div class="answered-number draft">12</div>
+      <div class="answered-label">questions finished</div>
+    </div>
+  </div>
+  <ul id="prompts" class="prepend-5 span-19 last">
+  <% @prompts.each { |prompt| %>
+    <li class="prompt">
+      <div id="question-<%= prompt.id %>" class="question">
+	<%= prompt.text %>
+      </div>
+      <% if prompt.id % 3 == 0 then 
+           status_class = 'not-started'
+	   status_text = 'Not started yet'
+	 elsif prompt.id % 3 == 1 then
+	   status_class = 'draft'
+           status_text = 'Draft'
+	 else
+	   status_class = 'finished'
+           status_text = 'Finished'
+	 end
+      %>
+      <div><span class="status <%= status_class %>"><%= status_text %></span></div>
+      <ul class="prompt-buttons">
+	<li>
+	<button id="answer-<%= prompt.id %>" class="big-button answer-button">Answer &raquo;</button>
+	</li>
+      </ul>
+    </li>
+  <% } %>
+  </ul>
+<script type="text/javascript">
+$(function() {
+  $('#answer-button').click(function() {
+    $('#buttons').fadeOut(100, function() {
+      $('#answer-box').slideDown(200);
+    });
+  });
+  $('#answer-box-textarea').focus(function() {
+    if ($(this).html() === '<%= default_text %>') {
+      $(this).html('');
+    }
+    $(this).removeClass('default-text');
+  });
+  $('#skip-button').click(function() {
+    $('#back-button').show();
+    $('#questions').animate({marginLeft: "-=" + $('.question').width()});
+  });
+  $('#back-button').click(function() {
+    $('#questions').animate({marginLeft: "+=" + $('.question').width()});
+  });
+});
+</script>
