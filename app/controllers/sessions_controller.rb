@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   def new
     @title = "Sign in"
+    store_location
   end
 
   def create
@@ -13,7 +14,7 @@ class SessionsController < ApplicationController
     else
       # Log 'em in
       sign_in user
-      redirect_to home_path
+      redirect_back_or home_path
     end
   end
 

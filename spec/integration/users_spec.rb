@@ -67,6 +67,16 @@ describe "Users" do
         click_link "Sign out"
         controller.should_not be_signed_in
       end
+      
+      it "should return you to the original page" do
+        user = Factory(:user)
+        visit user_path(user)
+        click_link "Sign in"
+        fill_in :session_email, :with => user.email
+        fill_in :session_password, :with => user.password
+        click_button
+        response.should render_template('users/show')
+      end
     end
   end
 end

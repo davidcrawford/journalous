@@ -28,4 +28,13 @@ module SessionsHelper
     cookies.delete :remember_token
     self.current_user = nil
   end
+
+  def store_location
+    session[:return_path] = request.referer
+  end
+  
+  def redirect_back_or default
+    redirect_to(session[:return_path] || default)
+    session[:return_path] = nil
+  end
 end
