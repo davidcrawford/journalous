@@ -1,0 +1,28 @@
+<li class="prompt">
+  <div id="question-<%= prompt.id %>" class="question">
+    <%= prompt.text %>
+  </div>
+  <% if !defined?(answer) then 
+     status_class = 'not-started'
+	   status_text = 'Not started yet'
+	 elsif answer.status == "draft" then
+	   status_class = 'draft'
+     status_text = 'Draft'
+	 else
+	   status_class = 'finished'
+     status_text = 'Finished'
+	 end %>
+  <% if defined?(answer) then %>
+    <div id="answer-<%= answer.id %>" class="answer">
+      <%= answer.content %>
+    </div>
+  <% end %>
+  <div><span class="status <%= status_class %>"><%= status_text %></span></div>
+  <ul class="prompt-buttons">
+    <li>
+    <button id="answer-<%= prompt.id %>" class="big-button answer-button">
+      <%= link_to "Answer &raquo;", answer_path(prompt) %>
+    </button>
+    </li>
+  </ul>
+</li>

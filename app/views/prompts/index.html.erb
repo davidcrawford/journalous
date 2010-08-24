@@ -16,34 +16,29 @@
       <div class="answered-label">questions finished</div>
     </div>
   </div>
-  <ul id="prompts" class="prepend-5 span-19 last">
-  <% @prompts.each { |prompt| %>
-    <li class="prompt">
-      <div id="question-<%= prompt.id %>" class="question">
-	<%= prompt.text %>
-      </div>
-      <% if prompt.id % 3 == 0 then 
-           status_class = 'not-started'
-	   status_text = 'Not started yet'
-	 elsif prompt.id % 3 == 1 then
-	   status_class = 'draft'
-           status_text = 'Draft'
-	 else
-	   status_class = 'finished'
-           status_text = 'Finished'
-	 end
-      %>
-      <div><span class="status <%= status_class %>"><%= status_text %></span></div>
-      <ul class="prompt-buttons">
-	<li>
-	<button id="answer-<%= prompt.id %>" class="big-button answer-button">Answer &raquo;</button>
-	</li>
+  <div id="panes" class="prepend-5 span-19 last">
+    <div id="list-pane">
+      <h2>In Draft</h2>
+      <ul id="answered-prompts"> 
+      <% @answered.each { |prompt, answer| %>
+        <%= render 'prompt_summary', :prompt => prompt, :answer => answer %>
+      <% } %>
       </ul>
-    </li>
-  <% } %>
-  </ul>
+
+      <h2>More Questions!</h2>
+      <ul id="prompts">
+      <% @prompts.each { |prompt| %>
+        <%= render 'prompt_summary', :prompt => prompt %>
+      <% } %>
+      </ul>
+    </div>
+    <div id="answer-pane">
+      <%= render 'answer_pane', :prompt => @prompts[0] %>
+    </div>
+  </div>  
 <script type="text/javascript">
 $(function() {
+  $('#panes').panes();
   $('#answer-button').click(function() {
     $('#buttons').fadeOut(100, function() {
       $('#answer-box').slideDown(200);

@@ -8,7 +8,10 @@
     <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
     <%= stylesheet_link_tag 'memoirable', :media => 'screen' %>
     <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Vollkorn' %>
-    <%= javascript_include_tag 'jquery-1.4.2.min' %>
+    <%= stylesheet_link_tag 'panes', :media => 'screen' %>
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag 'jquery.ajaxSubmit' %>
+    <%= javascript_include_tag 'jquery.panes' %>
   </head>
   <body>
     <div class="container">

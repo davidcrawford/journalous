@@ -15,6 +15,7 @@ module SessionsHelper
   end
   
   def current_user
+    @current_user ||= user_from_basic_auth
     @current_user ||= user_from_remember_token
   end
   
@@ -23,6 +24,16 @@ module SessionsHelper
     User.find_by_remember_token(remember_token) unless remember_token.nil?
   end
   
+  def user_from_basic_auth
+    if !self.respond_to?(:authenticate_with_http_basic)
+      return false
+    end
+    authenticate_with_http_basic do |email, password|
+      user = User.authenticate(email, password)
+      self.sign_in user unless user.nil?
+    end
+  end
+ 
   def signed_in?
     !self.current_user.nil?
   end
@@ -42,7 +53,14 @@ module SessionsHelper
   end
   
   def deny_access
-    flash[:error] = "Please sign in"
-    redirect_to signin_path
+    respond_to do |format|
+      format.html {
+        flash[:error] = "Please sign in"
+        redirect_to signin_path
+      }
+      format.json {
+        render :json => { :error => "You must be signed in." }.to_json, :status => 403
+      }
+    end
   end
 end

@@ -7,9 +7,11 @@ ActionController::Routing::Routes.draw do |map|
   map.signout '/signout', :controller => 'sessions', :action => 'destroy'
   map.signup '/signup', :controller => 'users', :action => 'new'
 
-  map.home '/home', :controller => 'pages', :action => 'list'
+  map.home '/home', :controller => 'prompts', :action => 'index'
   map.root :controller => 'pages', :action => 'home'
-
+  
+  map.answer '/prompts/:id/answer', :controller => 'prompts', :action => 'answer', :conditions => { :method => :post }
+  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

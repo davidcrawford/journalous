@@ -34,11 +34,11 @@ ul li {
   list-style-type: none;
 }
 
-#prompts li:first-child {
+li.prompt:first-child {
   border: none;
 }
 
-#prompts .prompt {
+li.prompt {
   margin-bottom: 18px;
   border-top: 1px solid #CCC;
 }
@@ -46,6 +46,13 @@ ul li {
 .question {
   font-size: 40px;
   margin: 18px 0;
+}
+
+.answer {
+  font-size: 18px;
+  margin-bottom: 18px;
+  margin-left: 18px;
+  color: #666;
 }
 
 .prompt-buttons {
@@ -167,6 +174,15 @@ label {
     font-size: 1.2em;
 }
 
+.spinny {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  background-image: url('/images/spinny.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 //////////// not used /////
 
 #question-window {
@@ -199,6 +215,11 @@ label {
   font-size: 26px;
   padding: 6px;
   font-family: 'Vollkorn', serif;
+}
+
+.big-button a {
+  text-decoration: none;
+  color: inherit;
 }
 
 #save-cancel {

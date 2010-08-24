@@ -15,4 +15,10 @@ class Prompt < ActiveRecord::Base
   attr_accessible :text, :quote, :quote_author
   
   has_many :answers
+  
+  validates_presence_of :text
+
+  def hash
+    self.id
+  end
 end

@@ -5,6 +5,18 @@ class PromptsController < ApplicationController
   # GET /prompts.xml
   def index
     @prompts = Prompt.all
+    
+    @answered = {}
+    @prompts.each do |prompt|
+      answer = current_user.answer_for prompt
+      if !answer.nil?
+        @answered[prompt] = answer
+      end
+    end
+    
+    @answered.each do |prompt, answer|
+      @prompts.delete prompt
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -21,6 +33,24 @@ class PromptsController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @prompt }
     end
+  end
+  
+  def answer
+    prompt = Prompt.find_by_id(params[:id])
+    if prompt.nil?
+      render  :json => { :error => "You must include a prompt id" }.to_json,
+              :status => 400
+      return
+    end
+
+    if !params[:answer] || params[:answer][:content].blank?
+      render  :json => { :error => "You must include a non-empty 'content' field" }.to_json,
+              :status => 400
+      return
+    end
+    
+    answer = current_user.answer prompt, params[:answer][:content]
+    render :json => answer.to_json
   end
 
   # GET /prompts/new

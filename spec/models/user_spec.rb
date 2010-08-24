@@ -144,10 +144,18 @@ describe User do
     
     before(:each) do
       @user = User.create!(@attr)
+      @prompt = Factory(:prompt)
     end
     
     it "should have answers" do
       @user.should respond_to(:answers)
+    end
+    
+    it "should find an answer" do
+      @user.answer @prompt, "Some text"
+      answer = @user.answer_for @prompt
+      answer.should_not be_nil
+      answer.content.should == "Some text"
     end
   end
 end

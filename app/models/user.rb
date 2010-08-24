@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
       return answer
     end
     
+    def answer_for prompt
+      self.answers.find_by_prompt_id(prompt.id)
+    end
+    
     private
 
       def encrypt_password
