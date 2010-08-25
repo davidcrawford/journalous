@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.prompt_list '/prompts/list', :controller => 'prompts', :action => 'list'
   map.resources :prompts
   map.resources :users
   map.resources :sessions, :only => [:new, :create, :destroy]

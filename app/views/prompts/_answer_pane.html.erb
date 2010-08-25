@@ -1,18 +1,12 @@
-<form id="answer-pane">
-  <div class="prompt"><%= prompt.text %></div>
-  <textarea name="answer[content]">Tell your story here</textarea>
+<a href="#" onclick="$('#panes').panes('select', 'list-pane');">&laquo; Go back</a>
+<form id="answer-form">
+  <div class="question"></div>
+  <textarea name="answer[content]">Tell your story here...</textarea>
   <div class="actions">
     <span class="spinny" style="display: none">&nbsp;</span>
     <span class="status" style="display: none">Saved</span>
     <button class="big-button"
-      onclick="$(this).ajaxSubmit({
-        success: function() {
-          $('#answer-pane .status').html('Saved').show();
-        },
-        error: function() {
-          $('#answer-pane .status').html('Error').show();
-        }
-        }); return false;"
+      onclick="return Prompt.submit_answer($(this));"
       >
         Save
       </button>

@@ -24,13 +24,12 @@ $.fn.panes = function(configOrCommand, arg) {
   var handleCommand = function(panes, command, arg) {
     panes.each(function() {
       if(command === 'select') {
-        $(this).data('index').each(function() {
-          if (this.valueOf() !== arg) {
-            $('#' + this).addClass('panes-hidden').removeClass('panes-selected');
-          }
-          else {
-            $('#' + this).removeClass('panes-hidden').addClass('panes-selected');
-          }
+        var $selectedPane = $(this).children('#' + arg);
+        $(this).children('.panes-selected').fadeTo(350, 0.1, function() {
+          $(this).addClass('panes-hidden').removeClass('panes-selected');
+          $(this).css({'opacity': 1});
+          $selectedPane.removeClass('panes-hidden').addClass('panes-selected');
+          $('html, body').animate({scrollTop: $selectedPane.scrollTop()}, 'slow');
         });
       }
     });

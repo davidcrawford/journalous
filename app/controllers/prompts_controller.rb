@@ -4,24 +4,18 @@ class PromptsController < ApplicationController
   # GET /prompts
   # GET /prompts.xml
   def index
-    @prompts = Prompt.all
-    
-    @answered = {}
-    @prompts.each do |prompt|
-      answer = current_user.answer_for prompt
-      if !answer.nil?
-        @answered[prompt] = answer
-      end
-    end
-    
-    @answered.each do |prompt, answer|
-      @prompts.delete prompt
-    end
+    get_prompt_lists
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @prompts }
     end
+  end
+  
+  def list
+    get_prompt_lists
+    
+    render :partial => 'prompt_list'
   end
 
   # GET /prompts/1
@@ -112,4 +106,23 @@ class PromptsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+  
+  def get_prompt_lists
+    @prompts = Prompt.all
+    
+    @answered = {}
+    @prompts.each do |prompt|
+      answer = current_user.answer_for prompt
+      if !answer.nil?
+        @answered[prompt] = answer
+      end
+    end
+    
+    @answered.each do |prompt, answer|
+      @prompts.delete prompt
+    end
+  end
+
 end

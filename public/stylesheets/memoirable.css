@@ -121,6 +121,18 @@ li.prompt {
     color: white;
 }
 
+#answer-pane textarea {
+  width: 700px;
+  height: 900px;
+  font-size: 18px;
+  font-family: Vollkorn, serif;
+  padding: 18px;
+}
+
+.actions {
+  text-align: right;
+}
+
 //// Navigation ////
 
 #navigation {

@@ -18,44 +18,17 @@
   </div>
   <div id="panes" class="prepend-5 span-19 last">
     <div id="list-pane">
-      <h2>In Draft</h2>
-      <ul id="answered-prompts"> 
-      <% @answered.each { |prompt, answer| %>
-        <%= render 'prompt_summary', :prompt => prompt, :answer => answer %>
-      <% } %>
-      </ul>
-
-      <h2>More Questions!</h2>
-      <ul id="prompts">
-      <% @prompts.each { |prompt| %>
-        <%= render 'prompt_summary', :prompt => prompt %>
-      <% } %>
-      </ul>
+      <%= render 'prompt_list' %>
     </div>
     <div id="answer-pane">
       <%= render 'answer_pane', :prompt => @prompts[0] %>
     </div>
   </div>  
+<% content_for :scripts do %>
+<%= javascript_include_tag 'prompt' %>
 <script type="text/javascript">
 $(function() {
   $('#panes').panes();
-  $('#answer-button').click(function() {
-    $('#buttons').fadeOut(100, function() {
-      $('#answer-box').slideDown(200);
-    });
-  });
-  $('#answer-box-textarea').focus(function() {
-    if ($(this).html() === '<%= default_text %>') {
-      $(this).html('');
-    }
-    $(this).removeClass('default-text');
-  });
-  $('#skip-button').click(function() {
-    $('#back-button').show();
-    $('#questions').animate({marginLeft: "-=" + $('.question').width()});
-  });
-  $('#back-button').click(function() {
-    $('#questions').animate({marginLeft: "+=" + $('.question').width()});
-  });
 });
 </script>
+<% end %>

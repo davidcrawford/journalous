@@ -20,8 +20,10 @@
   <div><span class="status <%= status_class %>"><%= status_text %></span></div>
   <ul class="prompt-buttons">
     <li>
-    <button id="answer-<%= prompt.id %>" class="big-button answer-button">
-      <%= link_to "Answer &raquo;", answer_path(prompt) %>
+    <button id="answer-<%= prompt.id %>" class="big-button answer-button"
+      onclick="Prompt.begin_answer(<%= prompt.id %>, '<%= escape_javascript prompt.text %>')"
+      >
+      Answer &raquo;
     </button>
     </li>
   </ul>
