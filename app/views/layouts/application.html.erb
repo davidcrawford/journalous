@@ -9,6 +9,7 @@
     <%= stylesheet_link_tag 'memoirable', :media => 'screen' %>
     <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Vollkorn' %>
     <%= stylesheet_link_tag 'panes', :media => 'screen' %>
+    <%= yield :styles %>
     <%= javascript_include_tag :defaults %>
     <%= javascript_include_tag 'jquery.ajaxSubmit' %>
     <%= javascript_include_tag 'jquery.panes' %>

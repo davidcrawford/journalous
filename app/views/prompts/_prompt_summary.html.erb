@@ -21,9 +21,15 @@
   <ul class="prompt-buttons">
     <li>
     <button id="answer-<%= prompt.id %>" class="big-button answer-button"
+    <% if defined?(answer) then %>
+      onclick="Prompt.begin_answer(<%= prompt.id %>, '<%= escape_javascript prompt.text %>', '<%= escape_javascript answer.content %>')"
+      >
+      Edit &raquo;
+    <% else %> 
       onclick="Prompt.begin_answer(<%= prompt.id %>, '<%= escape_javascript prompt.text %>')"
       >
       Answer &raquo;
+    <% end %>
     </button>
     </li>
   </ul>

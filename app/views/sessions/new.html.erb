@@ -1,5 +1,9 @@
 <h2>Sign in</h2>
 
+<% content_for :styles do %>
+  <%= stylesheet_link_tag 'signup' %>
+<% end %>
+
 <% form_for(:session, :url => sessions_path) do |f| %>
   <div class="field">
     <%= f.label :email %>

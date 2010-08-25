@@ -1,8 +1,13 @@
 var Prompt = (function() {
-  var begin_answer = function(prompt_id, question) {
+  var begin_answer = function(prompt_id, question, answer) {
     $('#answer-pane .question').text(question);
     $('#answer-pane form').attr('action', '/prompts/' + prompt_id + '/answer');
-    $('#answer-pane textarea').text('Tell your story here...');
+    if (answer) {
+      $('#answer-pane textarea').text(answer);
+    }
+    else {
+      $('#answer-pane textarea').text('Tell your story here...');
+    }
     $('#panes').panes('select', 'answer-pane');
   };
   

@@ -157,6 +157,12 @@ describe User do
       answer.should_not be_nil
       answer.content.should == "Some text"
     end
+    
+    it "should update when answering the same prompt twice" do
+      answer = @user.answer @prompt, "Some text"
+      answer2 = @user.answer @prompt, "Different text"
+      answer.id.should == answer2.id
+    end
   end
 end
 

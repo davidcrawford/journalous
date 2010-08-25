@@ -44,8 +44,14 @@ class User < ActiveRecord::Base
     end
     
     def answer prompt, content
-      answer = self.answers.build({ :content => content })
-      prompt.answers << answer
+      answer = self.answer_for prompt
+      if answer.nil?
+        answer = self.answers.build({ :content => content })
+        prompt.answers << answer
+      else
+        answer.content = content
+        answer.save
+      end
       return answer
     end
     
