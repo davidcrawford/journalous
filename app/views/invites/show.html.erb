@@ -1,0 +1,43 @@
+<h2>Hi, <%= first_name @invite.name %>.</h2>
+<p>This is a gift from <%= @invite.giver_name %>.</p>
+<p><%= first_name @invite.giver_name %> says:</p>
+<blockquote id="message"><%= @invite.message.gsub /\n/, "<br/>" %></blockquote>
+
+<h2>How It Works</h2>
+<h3>Tell your stories.</h3>
+<p>
+Writing your memoir is hard.  That's why we at Memoirable
+have created a list of questions and prompts specially 
+designed to help you recall your most poignant experiences
+and highest values.  When you come to the Memoirable
+website, we'll present one at random.  You can choose to
+answer it now, or flip through others until something
+strikes a chord with you.
+</p>
+<h3>Create the book.</h3>
+<p>
+When you've answered enough prompts, we'll create a
+beautifully bound book for you to give to your children.
+Print as many as you want.
+</p>
+<p>
+You'll log in with the email address to which the gift was
+sent: <span class="invite-email"><%= @invite.email %></span>.
+Now just finalize your account by creating a password, and
+we'll begin.
+</p>
+
+<% form_for(@user) do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :name, :value => @invite.name %>
+  <%= f.hidden_field :email, :value => @invite.email %>
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, "Confirmation" %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <button class="big-button">Get Started</button>
+<% end %>

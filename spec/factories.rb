@@ -22,3 +22,10 @@ end
 Factory.define :answer do |answer|
   answer.content "My favorite color is red... no, blue!"
 end
+
+Factory.define :invite do |invite|
+  invite.name "Miles Davis"
+  invite.giver_name "Clifford Brown"
+  invite.email "mdavis@memoirable.com"
+  invite.message "Hey pops, please take this opportunity to tell me your life story.\n\n  Thanks,\nDavid"
+end

@@ -1,5 +1,6 @@
 body {
   font-family: 'Vollkorn', serif;
+  font-size: 16px;
 }
 
 #logo {
@@ -13,6 +14,7 @@ header {
   border-bottom: 4px solid black;
   background-color: #FFFEE3;
   padding: 0px 9px;
+  margin-bottom: 18px;
 }
 
 #header-links {
@@ -106,10 +108,6 @@ li.prompt {
     color: red;
 }
 
-label {
-    font-size: 1.2em;
-}
-
 .spinny {
   display: inline-block;
   height: 16px;
@@ -117,6 +115,14 @@ label {
   background-image: url('/images/spinny.gif');
   background-position: center;
   background-repeat: no-repeat;
+}
+
+label {
+  width: 115px;
+  font-size: 1.2em;
+  text-align: right;
+  margin-right: 18px;
+  display: inline-block;
 }
 
 //////////// Button Styles /////
@@ -144,6 +150,8 @@ label {
   text-decoration: none;
   color: inherit;
 }
+
+//////////// Form Styles ////////////
 
 .default-text {
   color: #cccccc;

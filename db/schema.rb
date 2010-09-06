@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100819060918) do
+ActiveRecord::Schema.define(:version => 20100906205934) do
 
   create_table "answers", :force => true do |t|
     t.string   "content"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(:version => 20100819060918) do
 
   add_index "answers", ["prompt_id"], :name => "index_answers_on_prompt_id"
   add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
+
+  create_table "invites", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "giver_name"
+  end
 
   create_table "prompts", :force => true do |t|
     t.string   "text"
