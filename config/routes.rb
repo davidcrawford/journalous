@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
 
   map.home '/home', :controller => 'prompts', :action => 'index'
-  map.root :controller => 'pages', :action => 'home'
+  map.root :controller => 'prompts', :action => 'index'
   
   map.answer '/prompts/:id/answer', :controller => 'prompts', :action => 'answer', :conditions => { :method => :post }
   

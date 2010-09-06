@@ -1,20 +1,21 @@
+<% content_for :styles do %>
+  <%= stylesheet_link_tag 'home' %>
+<% end %>
 <% default_text = "Type here to tell your story..." %>
-<div id="question-window">
-  <ul id="questions">
-  <% @prompts.each { |prompt| %>
-    <li class="question span-24 last"><%= prompt.text %></li>
-  <% } %>
-  </ul>
-</div>
-<form id="answer-box" style="display:none" class="span-24 last" action="#">
-    <textarea id="answer-box-textarea" class="span-23 last default-text"><%= default_text %></textarea>
+<div id="question" class="start-hidden">&nbsp;</div>
+<div id="answer-pane" class="start-hidden">
+<form id="answer-box" class="span-24 last" action="#">
+    <textarea name="answer[content]" id="answer-box-textarea" class="span-23 last default-text"><%= default_text %></textarea>
     <div class="prepend-15 span-9 last">
+      <span class="status">&nbsp;</span>
+      <span class="spinny">&nbsp;</span>
       <ul id="save-cancel" class="button-set">
-	<li><button id="cancel" class="big-button">Cancel</button></li>
-	<li><button id="save" class="big-button">Save</button></li>
+        <li><button id="cancel-button" class="big-button">Cancel</button></li>
+        <li><button id="save-button" class="big-button" onclick="return Prompt.submit_answer($(this));">Save</button></li>
       </ul>
     </div>
 </form>
+</div>
 <div id="buttons" class="span-24 last">
 <ul class="button-set span-2">
   <li><button id="back-button" style="display: none" class="big-button span-2">&laquo;</button></li>
@@ -27,11 +28,24 @@
   <li><button id="skip-button" class="big-button span-2">&raquo;</button></li>
 </ul>
 </div>
+<% content_for :scripts do %>
+<%= javascript_include_tag 'prompt' %>
 <script type="text/javascript">
 $(function() {
+  var prompts = <%= @prompts.to_json %>
+  var currentIndex = 0
+  var showPrompt = function(index) {
+    var prompt = prompts[index].prompt
+    $('#question').fadeOut(200, function() {
+      $(this).html(prompt.text);
+      $(this).fadeIn(200);
+    });
+    $('#answer-pane form').attr('action', '/prompts/' + prompt.id + '/answer');
+  };
+  showPrompt(currentIndex);
   $('#answer-button').click(function() {
     $('#buttons').fadeOut(100, function() {
-      $('#answer-box').slideDown(200);
+      $('#answer-pane').fadeIn(200);
     });
   });
   $('#answer-box-textarea').focus(function() {
@@ -40,12 +54,38 @@ $(function() {
     }
     $(this).removeClass('default-text');
   });
+  $('#answer-box-textarea').blur(function() {
+    if ($(this).val() === '') {
+      $(this).html('<%= default_text %>');
+      $(this).addClass('default-text');
+    }
+  });
+  $('#cancel-button').click(function(e) {
+    $('#answer-pane').fadeOut(100, function() {
+      $('#buttons').fadeIn(200);
+    });
+  });
+  $('#answer-box').submit(function() { return false; });
   $('#skip-button').click(function() {
-    $('#back-button').show();
-    $('#questions').animate({marginLeft: "-=" + $('.question').width()});
+    if (currentIndex + 1 < prompts.length) {
+      currentIndex++;
+      $('#back-button').show().removeAttr('disabled');
+      showPrompt(currentIndex);
+      if (currentIndex + 1 === prompts.length) {
+        $('#skip-button').attr('disabled', 'disabled');
+      }
+    }
   });
   $('#back-button').click(function() {
-    $('#questions').animate({marginLeft: "+=" + $('.question').width()});
+    if (currentIndex > 0) {
+      currentIndex--;
+      $('#skip-button').removeAttr('disabled');
+      showPrompt(currentIndex);
+      if (currentIndex === 0) {
+        $('#back-button').attr('disabled', 'disabled');
+      }
+    }
   });
 });
 </script>
+<% end %>
