@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resources :sessions, :only => [:new, :create, :destroy]
   map.resources :invites, :only => [:new, :create, :show]
+  map.invite_accept '/invites/:id/accept', :controller => 'invites', :action => 'accept', :conditions => { :method => :post }
 
   map.signin '/signin', :controller => 'sessions', :action => 'new'
   map.signout '/signout', :controller => 'sessions', :action => 'destroy'

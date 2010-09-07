@@ -27,7 +27,7 @@ Now just finalize your account by creating a password, and
 we'll begin.
 </p>
 
-<% form_for(@user) do |f| %>
+<% form_for(@user, :url => invite_accept_path) do |f| %>
   <%= f.error_messages %>
   <%= f.hidden_field :name, :value => @invite.name %>
   <%= f.hidden_field :email, :value => @invite.email %>

@@ -18,4 +18,16 @@ class InvitesController < ApplicationController
       render 'new'
     end
   end
+  
+  def accept
+    @user = User.new(params[:user])
+    if @user.save then
+      sign_in @user
+      redirect_to root_path
+    else
+      @title = "Welcome"
+      @invite = Invite.find(params[:id])
+      render 'show'
+    end
+  end
 end

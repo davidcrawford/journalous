@@ -125,6 +125,10 @@ label {
   display: inline-block;
 }
 
+.fieldWithErrors {
+  display: inline;
+}
+
 //////////// Button Styles /////
 
 

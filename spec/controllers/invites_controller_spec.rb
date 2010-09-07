@@ -55,4 +55,32 @@ describe InvitesController do
       end
     end
   end
+  
+  describe "POST 'accept'" do
+    
+    before(:each) do
+      @invite = Factory(:invite)
+      @user = Factory(:user)
+      User.stub!(:new).and_return(@user)
+    end
+    
+    describe "failure" do
+      
+      it "should render the 'show' template" do
+        Invite.stub!(:find).and_return(@invite)
+        @user.should_receive(:save).and_return(false)
+        post :accept, :id => 1, :user => @user
+        response.should render_template('show')
+      end
+    end
+    
+    describe "success" do
+      
+      it "should redirect to the root path" do
+        @user.should_receive(:save).and_return(true)
+        post :accept, :invite => @invite, :user => @user
+        response.should redirect_to(root_path)
+      end
+    end
+  end
 end
