@@ -3,8 +3,11 @@ namespace :db do
   task :populate, [:file] => :environment do |t, args|
     prompts = File.open(args.file, "r")
     prompts.each do |line|
-      text = line.chomp
-      Prompt.create!(:text => text)
+      tokens = line.chomp.split('|')
+      text = tokens[0]
+      quote = tokens[1] if tokens.length > 1
+      author = tokens[2] if tokens.length > 2
+      Prompt.create!(:text => text, :quote => quote, :quote_author => author)
     end
     prompts.close
   end

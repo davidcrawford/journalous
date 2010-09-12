@@ -44,4 +44,19 @@ describe Invite do
       invalid_email_invite.should_not be_valid
     end
   end
+  
+  describe "tokens" do
+    
+    before(:each) do
+      @invite = Invite.create!(@attr)
+    end
+    
+    it "should have a token" do
+      @invite.should respond_to(:token)
+    end
+    
+    it "should set the token" do
+      @invite.token.should_not be_blank
+    end
+  end
 end

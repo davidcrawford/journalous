@@ -2,13 +2,20 @@
   <%= stylesheet_link_tag 'home' %>
 <% end %>
 <% default_text = "Type here to tell your story..." %>
-<div id="question" class="start-hidden">&nbsp;</div>
+<div id="prompt" style="display: none">
+  <div id="question"></div>
+  <blockquote><span id="quote">When I was a boy of fourteen, my father was so ignorant I could hardly stand to have the old man around. But when I got to be twenty-one, I was astonished at how much the old man had learned in seven years.</span>
+    <figure id="arrow"></figure>
+    <div id="author">&mdash;Mark Twain</div>
+  </blockquote>
+
+</div>
 <div id="answer-pane" class="start-hidden">
 <form id="answer-box" class="span-24 last" action="#">
-    <textarea name="answer[content]" id="answer-box-textarea" class="span-23 last default-text"><%= default_text %></textarea>
+    <textarea name="answer[content]" id="answer-box-textarea" class="default-text"><%= default_text %></textarea>
     <div class="prepend-15 span-9 last">
       <span class="status">&nbsp;</span>
-      <span class="spinny start-hidden">&nbsp;</span>
+      <span class="spinny" style="display:none">&nbsp;</span>
       <ul id="save-cancel" class="button-set">
         <li><button id="cancel-button" class="big-button">Cancel</button></li>
         <li><button id="save-button" class="big-button" onclick="return Prompt.submit_answer($(this));">Save</button></li>
@@ -22,7 +29,6 @@
 </ul>
 <ul id="answer-see-more" class="button-set span-20 last">
   <li><button id="answer-button" class="big-button">Answer</button></li>
-  <li><button id="see-more-button" class="big-button">See More</button></li>
 </ul>
 <ul class="button-set span-2 last">
   <li><button id="skip-button" class="big-button span-2">&raquo;</button></li>
@@ -30,22 +36,42 @@
 </div>
 <% content_for :scripts do %>
 <%= javascript_include_tag 'prompt' %>
+<%= javascript_include_tag 'jquery.autoresize' %>
 <script type="text/javascript">
 $(function() {
   var prompts = <%= @prompts.to_json %>
   var currentIndex = 0
   var showPrompt = function(index) {
     var prompt = prompts[index].prompt
-    $('#question').fadeOut(200, function() {
-      $(this).html(prompt.text);
-      $(this).fadeIn(200);
+    $('#prompt').fadeOut(325, function() {
+      $(this).children('#question').html(prompt.text);
+      var $quote = $(this).children('blockquote');
+      if (prompt.quote) {
+        $quote.children('#quote').html(prompt.quote);
+        $quote.children('#author').html('&mdash;'+prompt.quote_author);
+        $quote.show();
+      }
+      else {
+        $quote.hide();
+      }
+      $(this).fadeIn(325);
     });
     $('#answer-pane form').attr('action', '/prompts/' + prompt.id + '/answer');
   };
+  var questionPadding = 0;
   showPrompt(currentIndex);
   $('#answer-button').click(function() {
     $('#buttons').fadeOut(100, function() {
-      $('#answer-pane').fadeIn(200);
+      questionPadding = $('#question').css('padding-top');
+      $('#question').animate({ paddingTop: 0 }, 200, function() {
+        $('#answer-pane').fadeIn(100);
+      });
+    });
+  });
+  $('#cancel-button').click(function(e) {
+    $('#answer-pane').fadeOut(100, function() {
+      $('#question').animate({ paddingTop: questionPadding }, 200);
+      $('#buttons').fadeIn(200);
     });
   });
   $('#answer-box-textarea').focus(function() {
@@ -53,17 +79,16 @@ $(function() {
       $(this).html('');
     }
     $(this).removeClass('default-text');
-  });
-  $('#answer-box-textarea').blur(function() {
+  })
+  .blur(function() {
     if ($(this).val() === '') {
       $(this).html('<%= default_text %>');
       $(this).addClass('default-text');
     }
-  });
-  $('#cancel-button').click(function(e) {
-    $('#answer-pane').fadeOut(100, function() {
-      $('#buttons').fadeIn(200);
-    });
+  })
+  .autoResize({
+    animateDuration: 100,
+    extraSpace: 30
   });
   $('#answer-box').submit(function() { return false; });
   $('#skip-button').click(function() {

@@ -6,13 +6,13 @@ body {
 #logo {
   letter-spacing: 0.065em;
   font-size: 40px;
-  color: black;
+  color: #7A6640;
   text-decoration: none;
 }
 
 header {
-  border-bottom: 4px solid black;
-  background-color: #FFFEE3;
+  border-bottom: 4px solid #7A6640;
+  background-color: #FEFDF2;
   padding: 0px 9px;
   margin-bottom: 18px;
 }
@@ -154,8 +154,6 @@ label {
   text-decoration: none;
   color: inherit;
 }
-
-//////////// Form Styles ////////////
 
 .default-text {
   color: #cccccc;

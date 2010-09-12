@@ -5,7 +5,7 @@ class InvitesController < ApplicationController
 
   def show
     @title = "Welcome"
-    @invite = Invite.find(params[:id])
+    @invite = Invite.find_by_token(params[:id])
     @user = User.new
   end
   

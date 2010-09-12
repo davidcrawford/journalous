@@ -1,5 +1,35 @@
+#prompt {
+  padding: 54px 36px 36px;
+}
+
 #question {
   font-size: 50px;
+  width: 600px;
+}
+
+#prompt blockquote {
+  border-left: 2px solid #CA9865;
+  padding-left: 25px;
+  font-size: 18px;
+  margin-top: 36px;
+  margin-left: 375px;
+  color: #666666;
+  font-style: italic;
+  position: relative;
+}
+
+#arrow {
+  position: absolute;
+  width: 375px;
+  left: -375px;
+  top: 50%;
+  border-top: 2px solid  #CA9865;
+}
+
+#author {
+  margin-top: 9px;
+  text-align: right;
+  color: #7A6640;
 }
 
 #save-cancel {
@@ -7,9 +37,11 @@
 }
 
 #answer-box-textarea {
-  padding: 20px;
   font-family: Vollkorn, serif;
   font-size: 18px;
+  margin: 0px 36px;
+  padding: 25px;
+  width: 826px;
 }
 
 #answer-see-more {
@@ -21,3 +53,14 @@
   margin: 36px 0;
   position: fixed;
 }
+
+/*
+#answer-button {
+  color: #fef4e9;
+  border: solid 1px #da7c0c;
+  background: #f78d1d;
+  background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+  background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+}
+*/

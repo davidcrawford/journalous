@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100906205934) do
+ActiveRecord::Schema.define(:version => 20100911042851) do
 
   create_table "answers", :force => true do |t|
     t.string   "content"
@@ -30,7 +30,10 @@ ActiveRecord::Schema.define(:version => 20100906205934) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "giver_name"
+    t.string   "token"
   end
+
+  add_index "invites", ["token"], :name => "index_invites_on_token", :unique => true
 
   create_table "prompts", :force => true do |t|
     t.string   "text"
