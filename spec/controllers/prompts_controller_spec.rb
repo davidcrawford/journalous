@@ -49,8 +49,14 @@ describe PromptsController do
     
     describe "failure" do
       
-      it "should return 403" do
+      it "should return 403 for json" do
         post :answer, :format => "json"
+        response.should_not be_success
+        response.status.should =~ /403/
+      end
+      
+      it "should return 403 for xhr" do
+        xhr :post, :answer
         response.should_not be_success
         response.status.should =~ /403/
       end

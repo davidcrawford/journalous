@@ -53,6 +53,10 @@ module SessionsHelper
   end
   
   def deny_access
+    if request.xhr?
+      render :json => { :error => "You must be signed in." }.to_json, :status => 403
+      return
+    end
     respond_to do |format|
       format.html {
         flash[:error] = "Please sign in"
