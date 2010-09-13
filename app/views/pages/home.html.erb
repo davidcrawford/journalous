@@ -2,6 +2,10 @@
   <%= stylesheet_link_tag 'home' %>
 <% end %>
 <% default_text = "Type here to tell your story..." %>
+<!-- Let's not do this yet
+<div id="giver-message" class="span-18"><%= shorten current_user.invite.message, 75 %></div>
+<div id="num-answers" class="span-6 last"><%= current_user.answers.length %> answers</div>
+//-->
 <div id="prompt" style="display: none">
   <div id="question"></div>
   <blockquote><span id="quote">When I was a boy of fourteen, my father was so ignorant I could hardly stand to have the old man around. But when I got to be twenty-one, I was astonished at how much the old man had learned in seven years.</span>
@@ -18,14 +22,14 @@
       <span class="spinny" style="display:none">&nbsp;</span>
       <ul id="save-cancel" class="button-set">
         <li><button id="cancel-button" class="big-button">Cancel</button></li>
-        <li><button id="save-button" class="big-button" onclick="return Prompt.submit_answer($(this));">Save</button></li>
+        <li><button id="save-button" class="big-button">Save</button></li>
       </ul>
     </div>
 </form>
 </div>
 <div id="buttons" class="span-24 last">
 <ul class="button-set span-2">
-  <li><button id="back-button" style="display: none" class="big-button span-2">&laquo;</button></li>
+  <li><button id="back-button" disabled="disabled" class="big-button span-2">&laquo;</button></li>
 </ul>
 <ul id="answer-see-more" class="button-set span-20 last">
   <li><button id="answer-button" class="big-button">Answer</button></li>
@@ -48,7 +52,14 @@ $(function() {
       var $quote = $(this).children('blockquote');
       if (prompt.quote) {
         $quote.children('#quote').html(prompt.quote);
-        $quote.children('#author').html('&mdash;'+prompt.quote_author);
+        var $author = $quote.children('#author');
+        if (prompt.quote_author) {
+          $author.html('&mdash;'+prompt.quote_author);
+          $author.show();
+        }
+        else {
+          $author.hide();
+        }
         $quote.show();
       }
       else {
@@ -65,14 +76,22 @@ $(function() {
       questionPadding = $('#question').css('padding-top');
       $('#question').animate({ paddingTop: 0 }, 200, function() {
         $('#answer-pane').fadeIn(100);
+        $('body').animate({scrollTop: $('#answer-box').position().top}, 100);
+        $('#answer-box-textarea').focus();
       });
     });
   });
-  $('#cancel-button').click(function(e) {
+  var closeAnswerBox = function() {
     $('#answer-pane').fadeOut(100, function() {
       $('#question').animate({ paddingTop: questionPadding }, 200);
       $('#buttons').fadeIn(200);
     });
+  };
+  $('#cancel-button').click(closeAnswerBox);
+  $('#save-button').click(function() {
+    Prompt.submit_answer($(this));
+    closeAnswerBox();
+    return false;
   });
   $('#answer-box-textarea').focus(function() {
     if ($(this).html() === '<%= default_text %>') {

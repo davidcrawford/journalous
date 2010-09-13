@@ -60,16 +60,16 @@ describe InvitesController do
     
     before(:each) do
       @invite = Factory(:invite)
+      Invite.stub!(:find_by_token).and_return(@invite)
       @user = Factory(:user)
-      User.stub!(:new).and_return(@user)
+      @invite.should_receive(:accept).and_return(@user)
     end
     
     describe "failure" do
       
       it "should render the 'show' template" do
-        Invite.stub!(:find).and_return(@invite)
-        @user.should_receive(:save).and_return(false)
-        post :accept, :id => 1, :user => @user
+        @user.should_receive(:valid?).and_return(false)
+        post :accept, :id => @invite.token, :user => @user
         response.should render_template('show')
       end
     end
@@ -77,7 +77,6 @@ describe InvitesController do
     describe "success" do
       
       it "should redirect to the root path" do
-        @user.should_receive(:save).and_return(true)
         post :accept, :invite => @invite, :user => @user
         response.should redirect_to(root_path)
       end

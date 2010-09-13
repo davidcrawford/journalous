@@ -20,13 +20,13 @@ class InvitesController < ApplicationController
   end
   
   def accept
-    @user = User.new(params[:user])
-    if @user.save then
+    @invite = Invite.find_by_token(params[:id])
+    @user = @invite.accept(params[:user][:password], params[:user][:password_confirmation])
+    if @user.valid? then
       sign_in @user
       redirect_to root_path
     else
       @title = "Welcome"
-      @invite = Invite.find(params[:id])
       render 'show'
     end
   end

@@ -59,4 +59,48 @@ describe Invite do
       @invite.token.should_not be_blank
     end
   end
+  
+  describe "accept" do
+    
+    before(:each) do
+      @invite = Invite.create!(@attr)
+    end
+    
+    it "should accept the invitation" do
+      @invite.accept("passwd", "passwd").should be_valid
+    end
+    
+    it "should reject mismatched passwords" do
+      @invite.accept("abcdefg", "123456").should_not be_valid
+    end
+    
+    it "should create a user" do
+      @invite.accept("passwd", "passwd")
+      @invite.user.should_not be_nil
+    end
+    
+    it "should create a user with the same name and email" do
+      @invite.accept("passwd", "passwd")
+      @invite.user.name.should == @invite.name
+      @invite.user.email.should == @invite.email
+    end
+  end
+      
+  
+  describe "user associations" do
+    
+    before(:each) do
+      @user = Factory(:user)
+      @invite = Invite.create!(@attr)
+    end
+    
+    it "should have a user" do
+      @invite.should respond_to(:user)
+    end
+    
+    it "should be able to set the user" do
+      @invite.user = @user
+      @invite.user.should_not be_blank
+    end
+  end
 end

@@ -28,4 +28,5 @@ Factory.define :invite do |invite|
   invite.giver_name "Clifford Brown"
   invite.email "mdavis@memoirable.com"
   invite.message "Hey pops, please take this opportunity to tell me your life story.\n\n  Thanks,\nDavid"
+  invite.token "cafefeed"
 end
