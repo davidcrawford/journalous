@@ -1,13 +1,5 @@
-<h2>In Draft</h2>
 <ul id="answered-prompts"> 
 <% @answered.each { |prompt, answer| %>
   <%= render 'prompt_summary', :prompt => prompt, :answer => answer %>
-<% } %>
-</ul>
-
-<h2>More Questions!</h2>
-<ul id="prompts">
-<% @prompts.each { |prompt| %>
-  <%= render 'prompt_summary', :prompt => prompt %>
 <% } %>
 </ul>

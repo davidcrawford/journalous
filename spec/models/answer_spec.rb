@@ -19,6 +19,11 @@ describe Answer do
     @answer.status.should == "draft"
   end
   
+  it "should save a non-draft status" do
+    @answer = @user.answers.build(@attr.merge({:status => "finished"}))
+    @answer.status.should == "finished"
+  end
+  
   describe "user associations" do
     
     before(:each) do

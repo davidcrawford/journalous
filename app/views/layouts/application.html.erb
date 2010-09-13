@@ -18,10 +18,10 @@
   <body>
     <div class="container">
       <header>
-	      <span id="logo">memoirable</span>
+	      <span id="logo"><%= link_to "memoirable", root_path %></span>
         <ul id="header-links">
           <% if signed_in? %>
-            <li><span class="word-count-number">102</span> words</li>
+            <li><%= link_to "Your Answers", your_answers_path %></li>
             <li><%= link_to "Sign out", signout_path %></li>
           <% else %>
             <li><%= link_to "Sign in", signin_path %></li>

@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
-  attr_accessible :content
+  attr_accessible :content, :status
   
   belongs_to :user
   belongs_to :prompt

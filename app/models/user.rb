@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
     def answer prompt, content
       answer = self.answer_for prompt
       if answer.nil?
-        answer = self.answers.build({ :content => content })
+        answer = self.answers.build({ :content => content, :status => "finished" })
         prompt.answers << answer
       else
         answer.content = content

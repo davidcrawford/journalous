@@ -28,6 +28,19 @@ describe UsersController do
       response.should be_success
     end
   end
+  
+  describe "GET 'answers'" do
+    
+    before(:each) do
+      @user = Factory(:user)
+      User.stub!(:find, @user.id).and_return @user
+    end
+    
+    it "should be successful" do
+      get :answers, :id => @user
+      response.should be_success
+    end
+  end
 
   describe "POST 'create'" do
 

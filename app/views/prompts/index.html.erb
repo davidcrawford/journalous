@@ -1,23 +1,144 @@
-<% default_text = "Type here to tell your story..." %>
 <% content_for :styles do %>
-  <%= stylesheet_link_tag 'list' %>
+  <%= stylesheet_link_tag 'home' %>
 <% end %>
-  <div id="top-bar" style="display: none">
-    <a href="#">See your work in progress</a>
+<% default_text = "Type here to tell your story..." %>
+<% if false %>
+<!-- Let's not do this yet
+<div id="giver-message" class="span-18"><%= shorten current_user.invite.message, 75 %></div>
+<div id="num-answers" class="span-6 last"><%= current_user.answers.length %> answers</div>
+//-->
+<% end %>
+<div id="prompt" class="clearfix" style="display: none">
+  <div id="question"></div>
+  <blockquote><span id="quote">When I was a boy of fourteen, my father was so ignorant I could hardly stand to have the old man around. But when I got to be twenty-one, I was astonished at how much the old man had learned in seven years.</span>
+    <figure id="arrow"></figure>
+    <div id="author">&mdash;Mark Twain</div>
+  </blockquote>
+</div>
+
+<div id="answer-pane" class="clearfix" style="display: none">
+<form id="answer-box" class="span-24 last" action="#">
+  <textarea name="answer[content]" id="answer-box-textarea" class="default-text"><%= default_text %></textarea>
+  <div class="actions-bar prepend-15 span-9 last">
+    <span class="status">&nbsp;</span>
+    <span class="spinny" style="display:none">&nbsp;</span>
+    <ul id="save-cancel" class="button-set">
+      <li><button id="cancel-button" class="big-button">Cancel</button></li>
+      <li><button id="save-button" class="big-button">Finish</button></li>
+    </ul>
   </div>
-  <div id="panes" class="prepend-2 span-20 append-2 last">
-    <div id="list-pane">
-      <%= render 'prompt_list' %>
-    </div>
-    <div id="answer-pane">
-      <%= render 'answer_pane', :prompt => @prompts[0] %>
-    </div>
-  </div>  
+  <div class="saved-bar" style="display: none">
+    Great! Now you can see <%= link_to "your answers", your_answers_path %>
+    or answer <%= link_to "more questions", prompts_path %>.
+  </div>
+</form>
+</div>
+<div id="buttons" class="span-24 last">
+<ul class="button-set span-2">
+  <li><button id="back-button" disabled="disabled" class="big-button span-2">&laquo;</button></li>
+</ul>
+<ul id="answer-see-more" class="button-set span-20 last">
+  <li><button id="answer-button" class="big-button">Answer</button></li>
+</ul>
+<ul class="button-set span-2 last">
+  <li><button id="skip-button" class="big-button span-2">&raquo;</button></li>
+</ul>
+</div>
+<div id="spacer"></div>
 <% content_for :scripts do %>
 <%= javascript_include_tag 'prompt' %>
+<%= javascript_include_tag 'jquery.autoresize' %>
 <script type="text/javascript">
 $(function() {
-  $('#panes').panes();
+  var prompts = <%= @prompts.shuffle.to_json %>
+  var currentIndex = 0
+  var showPrompt = function(index) {
+    var prompt = prompts[index].prompt
+    $('#prompt').fadeOut(325, function() {
+      $(this).children('#question').html(prompt.text);
+      var $quote = $(this).children('blockquote');
+      if (prompt.quote) {
+        $quote.children('#quote').html(prompt.quote);
+        var $author = $quote.children('#author');
+        if (prompt.quote_author) {
+          $author.html('&mdash;'+prompt.quote_author);
+          $author.show();
+        }
+        else {
+          $author.hide();
+        }
+        $quote.show();
+      }
+      else {
+        $quote.hide();
+      }
+      $(this).fadeIn(325);
+    });
+    $('#answer-pane form').attr('action', '/prompts/' + prompt.id + '/answer');
+  };
+  var questionPadding = 0;
+  showPrompt(currentIndex);
+  $('#answer-button').click(function() {
+    $('#buttons').fadeOut(100, function() {
+      questionPadding = $('#question').css('padding-top');
+      $('#question').animate({ paddingTop: 0 }, 200, function() {
+        $('#answer-pane').fadeIn(100);
+        $('body').animate({scrollTop: $('#answer-box').position().top}, 100);
+        $('#answer-box-textarea').focus();
+      });
+    });
+  });
+  var closeAnswerBox = function() {
+    $('#answer-pane').fadeOut(100, function() {
+      $('#question').animate({ paddingTop: questionPadding }, 200);
+      $('#buttons').fadeIn(200);
+    });
+  };
+  $('#cancel-button').click(closeAnswerBox);
+  $('#save-button').click(function() {
+    Prompt.submit_answer($(this));
+    $('#answer-box-textarea').attr('disabled', 'disabled'); 
+    $('#answer-box .actions-bar').hide();
+    $('#answer-box .saved-bar').show();
+    return false;
+  });
+  $('#answer-box-textarea').focus(function() {
+    if ($(this).html() === '<%= default_text %>') {
+      $(this).html('');
+    }
+    $(this).removeClass('default-text');
+  })
+  .blur(function() {
+    if ($(this).val() === '') {
+      $(this).html('<%= default_text %>');
+      $(this).addClass('default-text');
+    }
+  })
+  .autoResize({
+    animateDuration: 100,
+    extraSpace: 30
+  });
+  $('#answer-box').submit(function() { return false; });
+  $('#skip-button').click(function() {
+    if (currentIndex + 1 < prompts.length) {
+      currentIndex++;
+      $('#back-button').show().removeAttr('disabled');
+      showPrompt(currentIndex);
+      if (currentIndex + 1 === prompts.length) {
+        $('#skip-button').attr('disabled', 'disabled');
+      }
+    }
+  });
+  $('#back-button').click(function() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      $('#skip-button').removeAttr('disabled');
+      showPrompt(currentIndex);
+      if (currentIndex === 0) {
+        $('#back-button').attr('disabled', 'disabled');
+      }
+    }
+  });
 });
 </script>
 <% end %>

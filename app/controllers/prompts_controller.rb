@@ -4,11 +4,12 @@ class PromptsController < ApplicationController
   # GET /prompts
   # GET /prompts.xml
   def index
+    @title = "Home"
     get_prompt_lists
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @prompts }
+      format.xml  { render :xml => {:answered => @answered, :unanswered => @prompts } }
     end
   end
   
@@ -17,6 +18,16 @@ class PromptsController < ApplicationController
     
     render :partial => 'prompt_list'
   end
+  
+  def answered
+    @title = "Your Answers"
+    get_prompt_lists
+    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @answered }
+    end
+  end 
 
   # GET /prompts/1
   # GET /prompts/1.xml

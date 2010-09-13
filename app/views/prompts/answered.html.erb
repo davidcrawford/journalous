@@ -1,0 +1,24 @@
+<% default_text = "Type here to tell your story..." %>
+<% content_for :styles do %>
+  <%= stylesheet_link_tag 'list' %>
+<% end %>
+  <div id="panes" class="prepend-2 span-20 append-2 last">
+    <div id="list-pane">
+      <ul id="answered-prompts"> 
+        <% @answered.each { |prompt, answer| %>
+          <%= render 'prompt_summary', :prompt => prompt, :answer => answer %>
+        <% } %>
+      </ul>
+    </div>
+    <div id="answer-pane">
+      <%= render 'answer_pane', :prompt => @prompts[0] %>
+    </div>
+  </div>  
+<% content_for :scripts do %>
+<%= javascript_include_tag 'prompt' %>
+<script type="text/javascript">
+$(function() {
+  $('#panes').panes();
+});
+</script>
+<% end %>

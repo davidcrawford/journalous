@@ -14,10 +14,12 @@
 	 end %>
   <% if defined?(answer) then %>
     <div id="answer-<%= answer.id %>" class="answer">
-      <%= answer.content %>
+      <%= add_brs answer.content %>
     </div>
   <% end %>
+  <% if false %>
   <div><span class="status <%= status_class %>"><%= status_text %></span></div>
+  <% end %>
   <ul class="prompt-buttons">
     <li>
     <button id="answer-<%= prompt.id %>" class="big-button answer-button"

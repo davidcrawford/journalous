@@ -21,18 +21,9 @@ describe PromptsController do
         response.should be_success
       end
       
-      it "should index prompts" do
+      it "should show a prompt" do
         get :index
-        response.should have_tag "ul#prompts" 
-      end
-      
-      it "should show answered prompts" do
-        answer = Factory(:answer, :user => @user, :prompt => @prompt)
-        Prompt.stub!(:all).and_return([@prompt])
-        @user.stub!(:answer_for).with(@prompt).and_return(answer)
-        get :index
-        response.should have_tag "ul#answered-prompts"
-        response.should have_tag "#answer-" + answer.id.to_s
+        response.should have_tag "#prompt" 
       end
     end
     
@@ -44,6 +35,28 @@ describe PromptsController do
       end
     end
   end
+  
+  describe "GET 'answered'" do
+    
+    before(:each) do
+      test_sign_in @user
+      @prompt = Factory(:prompt)
+    end
+    
+    it "should be successful" do
+      get :answered
+      response.should be_success
+    end
+      
+    it "should show answered prompts" do
+      answer = Factory(:answer, :user => @user, :prompt => @prompt)
+      Prompt.stub!(:all).and_return([@prompt])
+      @user.stub!(:answer_for).with(@prompt).and_return(answer)
+      get :answered
+      response.should have_tag "ul#answered-prompts"
+      response.should have_tag "#answer-" + answer.id.to_s
+    end
+  end 
   
   describe "POST 'answer'" do
     

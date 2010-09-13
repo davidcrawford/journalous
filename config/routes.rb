@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.your_answers '/prompts/answered', :controller => 'prompts', :action => 'answered'
   map.prompt_list '/prompts/list', :controller => 'prompts', :action => 'list'
   map.resources :prompts
   map.resources :users
@@ -14,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'prompts', :action => 'index'
   
   map.answer '/prompts/:id/answer', :controller => 'prompts', :action => 'answer', :conditions => { :method => :post }
+  map.user_answers '/user/:id/answers', :controller => 'users', :action => 'answers'
   
   # The priority is based upon order of creation: first created -> highest priority.
 

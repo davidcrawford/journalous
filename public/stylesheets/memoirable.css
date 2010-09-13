@@ -3,7 +3,7 @@ body {
   font-size: 16px;
 }
 
-#logo {
+#logo a {
   letter-spacing: 0.065em;
   font-size: 40px;
   color: #7A6640;
@@ -25,6 +25,7 @@ header {
 #header-links li {
   display: inline;
   font-size: 18px;
+  margin-left: 9px;
 }
 
 .start-hidden {
