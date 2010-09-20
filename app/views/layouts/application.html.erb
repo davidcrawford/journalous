@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>memoirable | <%= @title %></title>
+    <title>indelible me | <%= @title %></title>
     <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
     <%= stylesheet_link_tag 'blueprint/print', :media => 'print' %>
     <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
@@ -18,7 +18,7 @@
   <body>
     <div class="container">
       <header>
-	      <span id="logo"><%= link_to "memoirable", root_path %></span>
+	      <span id="logo"><%= link_to "indelible me", root_path %></span>
         <ul id="header-links">
           <% if signed_in? %>
             <li><%= link_to "Your Answers", your_answers_path %></li>
