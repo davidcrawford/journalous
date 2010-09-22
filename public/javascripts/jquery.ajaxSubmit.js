@@ -1,6 +1,6 @@
 (function($){
 $.fn.ajaxSubmit = function(config) {
-  var form = this.parents('form');
+  var form = (this.is('form')) ? this : this.parents('form');
   
   $.ajax({
     beforeSend: function(request) {

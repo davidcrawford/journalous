@@ -88,6 +88,10 @@ $(function() {
       $('#buttons').fadeIn(200);
     });
   };
+  $('form').submit(function() {
+    Prompt.submit_answer($(this));
+    return false;
+  });
   $('#cancel-button').click(closeAnswerBox);
   $('#save-button').click(function() {
     Prompt.submit_answer($(this));
@@ -133,6 +137,7 @@ $(function() {
       }
     }
   });
+  $('#answer-box-textarea').autosubmit();
 });
 </script>
 <% end %>
