@@ -1,0 +1,32 @@
+#top {
+  margin-bottom: 18px;
+  padding: 130px 0px;
+  text-align: center;
+}
+
+#tagline {
+  font-size: 48px;
+  color: #7A6640;
+  font-weight: bold;
+}
+
+.reason {
+/*  background-color: #FEFDF2; */
+  padding-top: 9px;
+}
+
+.reason p, .reason h3 {
+  padding: 0 18px;
+}
+
+#get-started {
+  text-align: center;
+  margin: 48px 0px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  right: 50px;
+  font-size: x-small;
+}

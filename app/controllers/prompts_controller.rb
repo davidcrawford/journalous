@@ -1,10 +1,15 @@
 class PromptsController < ApplicationController
-  before_filter :authenticate
+  before_filter :authenticate, :except => [ :index ]
   
   # GET /prompts
   # GET /prompts.xml
   def index
     @title = "Home"
+    if !signed_in?
+      render :template => "pages/home"
+      return
+    end
+    
     get_prompt_lists
 
     respond_to do |format|

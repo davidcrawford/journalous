@@ -29,9 +29,9 @@ describe PromptsController do
     
     describe "authentication failure" do
       
-      it "should redirect you to signin" do
+      it "should render front page" do
         get :index
-        response.should redirect_to(signin_path)
+        response.should render_template("pages/home");
       end
     end
   end
