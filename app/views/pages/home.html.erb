@@ -21,7 +21,13 @@
 </div>
 
 <section id="get-started" class="span-24 last">
-<button class="big-button">See how it works &raquo;</button>
+<button class="big-button" onclick="goto_signup();">See how it works &raquo;</button>
 </section>
 
 <footer>Photo courtesy Seattle Municipal Archives, item 31116</footer>
+
+<% content_for :scripts do %>
+<script type="text/javascript">
+  var goto_signup = function() { window.location = '<%= signup_path %>'; };
+</script>
+<% end %>
