@@ -9,15 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100913042924) do
+ActiveRecord::Schema.define(:version => 20100930032947) do
 
   create_table "answers", :force => true do |t|
-    t.string   "content"
+    t.text     "content",    :limit => 255
     t.integer  "user_id"
     t.integer  "prompt_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",     :default => "draft"
+    t.string   "status",                    :default => "draft"
   end
 
   add_index "answers", ["prompt_id"], :name => "index_answers_on_prompt_id"
