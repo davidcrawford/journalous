@@ -1,3 +1,11 @@
+#publish {
+  background-color: #FEFDF2;
+  border: 1px solid #EDECE1;
+  text-align: right;
+  padding: 12px 18px;
+  font-size: 26px;
+}
+
 .question {
   font-size: 36px;
   margin: 18px 0;

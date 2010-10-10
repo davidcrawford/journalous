@@ -12,7 +12,8 @@ label {
 }
 
 #signup-content {
-    margin-top: 1em;
+    margin-top: 2em;
+    padding: 0px 9px;
 }
 
 #signup-content #errorExplanation h2, #signup-content #errorExplanation p {

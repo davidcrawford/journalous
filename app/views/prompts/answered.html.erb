@@ -4,6 +4,9 @@
 <% end %>
   <div id="panes" class="prepend-2 span-20 append-2 last">
     <div id="list-pane">
+      <div id="publish">
+        Ready to publish? <button class="big-button">Publish Now &raquo;</button>
+      </div>
       <ul id="answered-prompts"> 
         <% @answered.each { |prompt, answer| %>
           <%= render 'prompt_summary', :prompt => prompt, :answer => answer %>
