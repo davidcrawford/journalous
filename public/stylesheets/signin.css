@@ -1,0 +1,13 @@
+label {
+  width: 115px;
+  font-size: 1.2em;
+  text-align: right;
+  margin-right: 18px;
+  display: inline-block;
+}
+
+.fieldWithErrors {
+  display: inline;
+}
+
+

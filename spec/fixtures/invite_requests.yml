@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  email: MyString
+  response_sent?: false
+  invite_sent?: false
+
+two:
+  email: MyString
+  response_sent?: false
+  invite_sent?: false

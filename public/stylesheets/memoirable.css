@@ -81,34 +81,6 @@ li.prompt {
     background-color: #EFEFEF;
 }
 
-#new_user {
-    display: table;
-    margin: 1em auto;
-    padding: 1.2em;
-    background-color: #FFFEE3;
-    border: 1px solid #F6EFE0;
-}
-
-#user_email {
-    font-size: 1.2em;
-    margin: 0.8em 0;
-    border-radius: 5px;
-    padding: 0.5em 0.75em;
-}
-
-#signup-content {
-    margin-top: 1em;
-    text-align: center;
-}
-
-#signup-content #errorExplanation h2, #signup-content #errorExplanation p {
-    display: none;
-}
-
-#signup-content #errorExplanation ul li {
-    color: red;
-}
-
 .spinny {
   display: inline-block;
   height: 16px;
@@ -116,18 +88,6 @@ li.prompt {
   background-image: url('/images/spinny.gif');
   background-position: center;
   background-repeat: no-repeat;
-}
-
-label {
-  width: 115px;
-  font-size: 1.2em;
-  text-align: right;
-  margin-right: 18px;
-  display: inline-block;
-}
-
-.fieldWithErrors {
-  display: inline;
 }
 
 //////////// Button Styles /////
@@ -156,6 +116,6 @@ label {
   color: inherit;
 }
 
-.default-text {
+.default-text, .default {
   color: #cccccc;
 }

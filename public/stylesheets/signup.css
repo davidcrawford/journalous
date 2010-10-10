@@ -1,6 +1,108 @@
+body {
+  padding-bottom: 36px;
+}
+
 label {
-  width: 75px;
-  text-align: right;
   margin-right: 18px;
   display: inline-block;
 }
+
+.fieldWithErrors {
+  display: inline;
+}
+
+#signup-content {
+    margin-top: 1em;
+}
+
+#signup-content #errorExplanation h2, #signup-content #errorExplanation p {
+    display: none;
+}
+
+#signup-content #errorExplanation ul li {
+    color: red;
+}
+
+li img {
+  border: 1px solid black;
+  float: right;
+  margin: 0px 0px 10px 10px;
+}
+
+#steps {
+  margin-top: 18px;
+}
+
+li {
+  font-size: 24px;
+}
+
+p {
+  font-size: 18px;
+}
+
+#screenshots {
+  text-align: center;
+}
+
+#buy-box {
+  padding: 1.2em;
+  background-color: #FFFEE3;
+  border: 1px solid #F6EFE0;
+  color: #7A6640;
+}
+
+#request {
+}
+
+#request-label {
+  margin-right: 0;
+  font-size: 26px;
+}
+
+#request #email {
+  font-size: 20px;
+  padding: 9px;
+  margin: 18px 0px;
+  width: 290px;
+}
+
+#explanation {
+  margin-top: 12px;
+  font-size: 16px;
+}
+
+#price {
+  float: right;
+  font-size: 36px;
+  padding-left: 16px;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+blockquote {
+  border-left: 2px solid #CA9865;
+  padding-left: 25px;
+  font-size: 18px;
+  margin-top: 36px;
+  margin-left: 375px;
+  color: #666666;
+  font-style: italic;
+  position: relative;
+}
+
+#arrow {
+  position: absolute;
+  width: 375px;
+  left: -375px;
+  top: 50%;
+  border-top: 2px solid  #CA9865;
+}
+
+#author {
+  margin-top: 9px;
+  text-align: right;
+  color: #7A6640;
+}
+
+

@@ -21,6 +21,7 @@ describe UsersController do
     before(:each) do
       @user = Factory(:user)
       User.stub!(:find, @user.id).and_return @user
+      test_sign_in @user
     end
 
     it "should be successful" do
@@ -34,6 +35,7 @@ describe UsersController do
     before(:each) do
       @user = Factory(:user)
       User.stub!(:find, @user.id).and_return @user
+      test_sign_in @user
     end
     
     it "should be successful" do
@@ -88,4 +90,3 @@ describe UsersController do
     end
   end
 end
-

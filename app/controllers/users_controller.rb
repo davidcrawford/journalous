@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :authenticate, :only => [ :show, :answers ]
 
   def show
     @user = User.find(params[:id])
@@ -7,6 +8,19 @@ class UsersController < ApplicationController
   def new
     @title = "Sign up"
     @user = User.new
+  end
+  
+  def email
+    @inv = InviteRequest.new({ :email => params[:email] })
+    
+    if @inv.save
+      # email
+      render :json => { :status => "success" }
+    else
+      render  :json => { :status => "error" },
+              :status => 400
+    end
+    return
   end
 
   def create

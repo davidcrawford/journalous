@@ -1,17 +1,80 @@
-<div id="signup-content">
-<h1>Capture a <span class="loud">memorable</span> life.</h1>
-<h1>Get <span class="loud">memoirable</span>.</h1>
-<div id="signup-form">
-<% form_for(@user) do |f| %>
-  <label>Enter your email address to get started.</label>
-  <%= f.error_messages %>
-  <div class = "field">
-    <%= f.text_field :email %>
-  </div>
-  <div class="actions">
-    <button class="big-button">Begin</button>
-    <%= f.submit "Begin" if false %>
-  </div>
+<% content_for :styles do %>
+  <%= stylesheet_link_tag 'signup' %>
 <% end %>
+
+<div id="signup-content">
+  <section id="intro" class="span-18 append-6 last">
+    <h1>It's simple.</h1>
+    <p>We often forget it, but life is an amazing adventure. In fact, it's so packed with stories that it's hard to remember all the remarkable (or remarkably foolish) things we've done.  Worse yet, it's possible our families have never heard about our triumphs and failures, our battles and our hard-earned lessons.  Indelible.me is designed with care to help you share these memories with your children and generations to come.</p>
+  </section>
+  <section id="quote" class="span-24 last">
+  <blockquote><span id="quote">That which resembles most living one's life over again seems to be to recall all the circumstances of it, and, to render this remembrance more durable, to record them in writing.
+    </span>
+    <figure id="arrow"></figure>
+    <div id="author">&mdash;Benjamin Franklin</div>
+  </blockquote>
+  </section>
+  <section id="steps" class="prepend-2 span-20 append-2 last">
+    <ol>
+      <li>Browse our prompts.
+        <img src="images/question-screenshot.png"/>
+        <p>Flip through the prompts.  Try to recall specific people and events, and read the quotes to get the words flowing.</p>
+      </li>
+      <li>Write.
+        <img src="images/answer-screenshot.png"/>
+        <p>Just click 'Answer' and type in the box.  We automatically save the answer as you go, so you never have to worry about losing your progress.</p>
+      </li>
+      <li>Publish the book.
+        <img src="images/publish-screenshot.png"/>
+        <p>When you're ready to go, just click "Publish" and we'll put together a hard-cover printed book, designed by our layout experts to present your words with the quality they deserve.</p>
+      </li>
+    </ol>
+  </section>
+  <section id="buy" class="prepend-6 span-12 append-6 last">
+    <div id="buy-box">
+      <form id="request" action="<%= add_email_path %>" onsubmit="return $InviteRequest.submit($(this));">
+        <label id="request-label" for="email">Request an invitation</label><br/>
+        <input type="textbox" name="email" id="email" title="Please enter your email" class="default required email"/>
+        <button class="big-button">Submit</button>
+        <div id="errors" style="display: none"></div>
+        <div id="explanation">Indelible.me is currently invitation only.  We'll send you an email when more invitations are available.</div>
+      </form>
+      <div id="submitted" style="display: none">
+        <h3>Thanks!</h3>
+        <p>We'll be in touch soon.</p>
+      </div>
+    </div>
+  </section>
 </div>
-</div>
+
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'jquery.validate.min' %>
+  <%= javascript_include_tag 'jquery.defaultText' %>
+  
+  <script type="text/javascript">
+$(function() {
+  $("#request").validate({ errorLabelContainer: "#errors" });
+  $.defaultText({
+    context: 'form'
+  });
+});
+var $InviteRequest = (function() {
+  var submit = function($form) {
+    if(!$form.valid()) return false;
+    
+    $form.ajaxSubmit({
+      success: function() {
+        $form.hide();
+        $("#submitted").show();
+      }
+    });
+    return false;
+  };
+  
+  return {
+    submit: submit
+  };
+})();
+      
+  </script>
+<% end %>

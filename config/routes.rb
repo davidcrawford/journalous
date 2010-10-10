@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.add_email '/users/email', :controller => 'users', :action => 'email'
   map.your_answers '/prompts/answered', :controller => 'prompts', :action => 'answered'
   map.prompt_list '/prompts/list', :controller => 'prompts', :action => 'list'
   map.resources :prompts
