@@ -11,10 +11,10 @@ class UsersController < ApplicationController
   end
   
   def email
-    @inv = InviteRequest.new({ :email => params[:email] })
+    @inv = InviteRequest.new({ :email => params[:email], :response_sent => true })
     
     if @inv.save
-      # email
+      Notifier.deliver_request_received(@inv)
       render :json => { :status => "success" }
     else
       render  :json => { :status => "error" },
