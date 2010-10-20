@@ -38,19 +38,25 @@
       </li>
     </ol>
   </section>
-  <section id="buy" class="prepend-6 span-12 append-6 last">
-    <div id="buy-box">
-      <form id="request" action="<%= add_email_path %>" onsubmit="return $InviteRequest.submit($(this));">
-        <label id="request-label" for="email">Request an invitation</label><br/>
-        <input type="textbox" name="email" id="email" title="Please enter your email" class="default required email"/>
-        <button class="big-button">Submit</button>
-        <div id="errors" style="display: none"></div>
-        <div id="explanation">Indelible.me is currently invitation only.  We'll send you an email when more invitations are available.</div>
-      </form>
-      <div id="submitted" style="display: none">
-        <h3>Thanks!</h3>
-        <p>We'll be in touch soon.</p>
+  <section id="buy" class="prepend-8 span-8 append-8 last">    <div id="buy-box">
+      <div id="price">$25
+        <% if Rails.env.development? %>
+          <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="YMCWGG9GLUML8">
+            <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+          </form>
+        <% else %>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+          <input type="hidden" name="cmd" value="_s-xclick">
+          <input type="hidden" name="hosted_button_id" value="NHMPZ9UZZSCBJ">
+          <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+          <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form>
+        <% end %>
       </div>
+      A lifetime account comes with one free printing of your finished book.
     </div>
   </section>
 </div>
