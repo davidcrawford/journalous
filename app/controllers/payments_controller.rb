@@ -1,3 +1,5 @@
+require "active_merchant"
+
 class PaymentsController < ApplicationController
   include ActiveMerchant::Billing
   
