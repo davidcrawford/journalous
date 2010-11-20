@@ -18,9 +18,11 @@ config.action_controller.perform_caching             = false
 config.action_mailer.raise_delivery_errors = false
 
 # Add paypal sandbox creds
-config.paypal_gateway.login = 'sell1_1289691878_biz_api1.minetowin.com'
-config.paypal_gateway.password = '1289691887'
-config.paypal_gateway.signature = 'AlnhS38RG3ELynQqUFkcFDobYejcA3e2JG95LVqUpxZbdMz577vhTmve'
+PAYPAL_GATEWAY = {
+	:login => 'sell1_1289691878_biz_api1.minetowin.com',
+	:password => '1289691887',
+	:signature => 'AlnhS38RG3ELynQqUFkcFDobYejcA3e2JG95LVqUpxZbdMz577vhTmve'
+}
 
 config.after_initialize do
   ActiveMerchant::Billing::Base.mode = :test

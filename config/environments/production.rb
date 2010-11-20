@@ -10,9 +10,11 @@ config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
 
 # Add paypal sandbox creds
-config.paypal_gateway.login = 'david_api1.indelible.me'
-config.paypal_gateway.password = 'JX3VZKTVCMGLUMAJ'
-config.paypal_gateway.signature = 'A4tZeiKswN2xXuxN7JPI7iw5r3MMAvVdV5oNgYQH3Q3SfhH.1WXlqq0U'
+PAYPAL_GATEWAY = {
+	:login => 'david_api1.indelible.me',
+	:password => 'JX3VZKTVCMGLUMAJ',
+	:signature => 'A4tZeiKswN2xXuxN7JPI7iw5r3MMAvVdV5oNgYQH3Q3SfhH.1WXlqq0U'
+}
 
 # See everything in the log (default is :info)
 # config.log_level = :debug

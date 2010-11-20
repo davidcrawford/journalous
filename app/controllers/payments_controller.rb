@@ -64,9 +64,9 @@ class PaymentsController < ApplicationController
   private
   def gateway
     @gateway ||= PaypalExpressGateway.new(
-      :login => config.paypal_gateway.login,
-      :password => config.paypal_gateway.password,
-      :signature => config.paypal_gateway.signature
+      :login => PAYPAL_GATEWAY[:login],
+      :password => PAYPAL_GATEWAY[:password],
+      :signature => PAYPAL_GATEWAY[:signature]
     )
   end
 
