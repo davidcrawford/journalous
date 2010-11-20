@@ -73,12 +73,16 @@ p {
   font-size: 16px;
 }
 
-#price {
+#price-box {
   float: right;
   font-size: 36px;
   padding-left: 16px;
   text-align: center;
   margin-bottom: 48px;
+}
+
+#buy-button {
+  margin-top: -15px;
 }
 
 blockquote {

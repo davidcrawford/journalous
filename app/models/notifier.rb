@@ -5,4 +5,11 @@ class Notifier < ActionMailer::Base
     from        "david@indelible.me"
     subject     "Thanks from Indelible.me"
   end
+  
+  def account_created(user)
+    @user = user
+    recipients  user.email
+    from        "david@indelible.me"
+    subject     "Your new indelible.me account"
+  end
 end

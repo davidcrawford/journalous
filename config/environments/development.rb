@@ -1,4 +1,5 @@
 # Settings specified here will take precedence over those in config/environment.rb
+require "active_merchant"
 
 # In the development environment your application's code is reloaded on
 # every request.  This slows down response time but is perfect for development
@@ -15,3 +16,7 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+config.after_initialize do
+  ActiveMerchant::Billing::Base.mode = :test
+end

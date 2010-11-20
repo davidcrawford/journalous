@@ -38,19 +38,16 @@
       </li>
     </ol>
   </section>
-  <section id="buy" class="prepend-6 span-12 append-6 last">
-    <div id="buy-box">
-      <form id="request" action="<%= add_email_path %>" onsubmit="return $InviteRequest.submit($(this));">
-        <label id="request-label" for="email">Request an invitation</label><br/>
-        <input type="textbox" name="email" id="email" title="Please enter your email" class="default required email"/>
-        <button class="big-button">Submit</button>
-        <div id="errors" style="display: none"></div>
-        <div id="explanation">Indelible.me is currently invitation only.  We'll send you an email when more invitations are available.</div>
-      </form>
-      <div id="submitted" style="display: none">
-        <h3>Thanks!</h3>
-        <p>We'll be in touch soon.</p>
+  <section id="buy" class="prepend-8 span-8 append-8 last">    <div id="buy-box">
+      <div id="price-box">
+        <div id="price">$25</div>
+        <div id="buy-button">
+          <a href="<%= url_for(:controller => 'payments', :action => 'checkout') %>">
+            <img alt="Buy Now" border="0" src="https://www.paypal.com/en_US/i/btn/btn_buynow_SM.gif"/>
+          </a>
+        </div>
       </div>
+      A lifetime account comes with one free printing of your finished book.
     </div>
   </section>
 </div>

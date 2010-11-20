@@ -6,6 +6,20 @@ label {
   display: inline-block;
 }
 
+input[type="text"], input[type="password"], .static-field span { 
+  font-size: 18px;
+  padding: 4px;
+  width: 250px;
+}
+
+.static-field {
+  padding: 9px 0px;
+}
+
+.actions {
+  margin: 18px 0px;
+}
+
 .fieldWithErrors {
   display: inline;
 }
