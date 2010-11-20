@@ -64,9 +64,9 @@ class PaymentsController < ApplicationController
   private
   def gateway
     @gateway ||= PaypalExpressGateway.new(
-      :login => 'sell1_1289691878_biz_api1.minetowin.com',
-      :password => '1289691887',
-      :signature => 'AlnhS38RG3ELynQqUFkcFDobYejcA3e2JG95LVqUpxZbdMz577vhTmve'
+      :login => config.paypal_gateway.login,
+      :password => config.paypal_gateway.password,
+      :signature => config.paypal_gateway.signature
     )
   end
 
