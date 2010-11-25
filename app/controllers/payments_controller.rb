@@ -56,6 +56,7 @@ class PaymentsController < ApplicationController
     if @user.save
       Notifier.deliver_account_created(@user)
       sign_in @user
+      flash[:new_user_conversion] = true
       redirect_to :controller => 'prompts', :action => 'index'
     else
       @message = "There was an error creating your account.  Please contact david@indelible.me to get this sorted out.  Sorry!"

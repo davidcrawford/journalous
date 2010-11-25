@@ -43,7 +43,31 @@
       </header>
       <section>
         <% flash.each do |key, value| %>
-          <%= content_tag :div, value, :class => "flash #{key}" %>
+          <% if key == :new_user_conversion %>
+            <!-- Google Code for New User Conversion Page -->
+            <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 1010285212;
+            var google_conversion_language = "en";
+            var google_conversion_format = "2";
+            var google_conversion_color = "ffffff";
+            var google_conversion_label = "xbcMCJzbggIQnPXe4QM";
+            var google_conversion_value = 0;
+            if (25) {
+              google_conversion_value = 25;
+            }
+            /* ]]> */
+            </script>
+            <script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+            </script>
+            <noscript>
+            <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1010285212/?value=25&amp;label=xbcMCJzbggIQnPXe4QM&amp;guid=ON&amp;script=0"/>
+            </div>
+            </noscript>
+          <% else %>
+            <%= content_tag :div, value, :class => "flash #{key}" %>
+          <% end %>
         <% end %>
       	<%= yield %>
       </section>
