@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
     validates_length_of :password, :in => 6..40
 
     before_save :encrypt_password
+    before_validation :downcase_email
 
     # Return true if the password matches the submitted password
     def has_password?(submitted)
@@ -34,7 +35,7 @@ class User < ActiveRecord::Base
     end
 
     def self.authenticate(email, submitted_password)
-      user = find_by_email(email)
+      user = find_by_email(email.downcase)
       return nil if user.nil?
       return user if user.has_password?(submitted_password)
     end
@@ -62,6 +63,10 @@ class User < ActiveRecord::Base
     
     private
 
+      def downcase_email
+        email.downcase!
+      end
+      
       def encrypt_password
         unless password.nil?
           self.salt = make_salt if new_record?
