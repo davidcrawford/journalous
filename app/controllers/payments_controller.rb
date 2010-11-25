@@ -20,11 +20,11 @@ class PaymentsController < ApplicationController
     
     details_response = gateway.details_for(params[:token])
     
-#    if !details_response.success?
-#      @message = details_response.message
-#      render :action => 'error'
-#      return
-#    end
+    if !details_response.success?
+      @message = details_response.message
+      render :action => 'error'
+      return
+    end
     
     @address = details_response.address
     @email = details_response.email
