@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101010042843) do
+ActiveRecord::Schema.define(:version => 20101223070529) do
 
   create_table "answers", :force => true do |t|
     t.text     "content",    :limit => 255
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20101010042843) do
   create_table "invites", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "message"
+    t.text     "message",    :limit => 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "giver_name"
