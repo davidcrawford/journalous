@@ -21,6 +21,8 @@ end
 
 Factory.define :answer do |answer|
   answer.content "My favorite color is red... no, blue!"
+  answer.user_id 1
+  answer.prompt_id 2
 end
 
 Factory.define :invite do |invite|

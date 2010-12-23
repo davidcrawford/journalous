@@ -47,6 +47,9 @@ $(function() {
   var prompts = <%= @prompts.shuffle.to_json %>
   var currentIndex = 0
   var showPrompt = function(index) {
+    // First clear the answer box since we're switching questions.
+    $('#answer-box-textarea').val('');
+    // Now switch to another prompt
     var prompt = prompts[index].prompt
     $('#prompt').fadeOut(325, function() {
       $(this).children('#question').html(prompt.text);
@@ -92,7 +95,9 @@ $(function() {
     Prompt.submit_answer($(this));
     return false;
   });
-  $('#cancel-button').click(closeAnswerBox);
+  $('#cancel-button').click(function() {
+    return closeAnswerBox();
+  });
   $('#save-button').click(function() {
     Prompt.submit_answer($(this));
     $('#answer-box-textarea').attr('disabled', 'disabled'); 
