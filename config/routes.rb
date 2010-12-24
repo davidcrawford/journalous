@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.mom '/mom', :controller => 'invites', :action => 'show', :id => '9e37d24bbb20e3f5eaf1c0764c0ca20b'
+  map.dad '/dad', :controller => 'invites', :action => 'show', :id => '562b9398f1a50bbb3fb522ed62c266cf'
   map.delete_answer '/answers/:id', :controller => 'answers', :action => 'delete', :conditions => { :method => :delete }
   map.add_email '/users/email', :controller => 'users', :action => 'email'
   map.your_answers '/prompts/answered', :controller => 'prompts', :action => 'answered'
