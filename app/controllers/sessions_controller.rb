@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     @title = "Sign in"
-    store_location
+    store_location unless request.referrer =~ /signup|signin|sessions/
   end
 
   def create
