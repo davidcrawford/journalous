@@ -24,20 +24,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    password = generate_password
-    @user = User.new(params[:user].merge({
-          :password => password,
-          :password_confirmation => password
-    }))
+    @user = User.new(params[:user])
     if @user.save
-      # Handle success
-      # Send password
-      Email.send params[:user][:email], :from => "notify@memoirable.com",
-                                        :subject => "Welcome to memoirable!",
-                                        :body => "Thanks for joining!  Here's your password: #{password}"
-      
+      Notifier.deliver_account_created(@user)
       sign_in @user
-      redirect_to :controller => 'pages', :action => 'list'
+      flash[:new_user_conversion] = true
+      redirect_to :controller => 'prompts', :action => 'index'
     else
       @title = "Sign up"
       render 'new'
