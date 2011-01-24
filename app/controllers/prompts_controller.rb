@@ -10,11 +10,14 @@ class PromptsController < ApplicationController
       return
     end
     
-    get_prompt_lists
+    prompt_lists = get_prompt_lists
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => {:answered => @answered, :unanswered => @prompts } }
+      format.json { render :json => 
+        (params[:answered] == "true" ? prompt_lists[:answered] : prompt_lists[:unanswered]).to_json
+      }
     end
   end
   
@@ -139,6 +142,8 @@ class PromptsController < ApplicationController
     @answered.each do |prompt, answer|
       @prompts.delete prompt
     end
+    
+    return { :answered => @answered, :unanswered => @prompts }
   end
 
 end

@@ -14,6 +14,13 @@
     <%= javascript_include_tag 'jquery.ajaxSubmit' %>
     <%= javascript_include_tag 'jquery.autosubmit' %>
     <%= javascript_include_tag 'jquery.panes' %>
+    <% if Rails.env.development? %>
+      <%= javascript_include_tag 'underscore.js' %>
+      <%= javascript_include_tag 'backbone.js' %>
+    <% else %>
+      <%= javascript_include_tag 'underscore-min.js' %>
+      <%= javascript_include_tag 'backbone-min.js' %>
+    <% end %> 
     <script type="text/javascript">
       // Google Analytics
       var _gaq = _gaq || [];

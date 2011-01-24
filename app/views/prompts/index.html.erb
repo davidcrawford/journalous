@@ -2,6 +2,7 @@
   <%= stylesheet_link_tag 'home' %>
 <% end %>
 <% default_text = "Type here to tell your story..." %>
+<div id="prompts">
 <div id="prompt" class="clearfix" style="display: none">
   <div id="question"></div>
   <blockquote><span id="quote">When I was a boy of fourteen, my father was so ignorant I could hardly stand to have the old man around. But when I got to be twenty-one, I was astonished at how much the old man had learned in seven years.</span>
@@ -29,22 +30,25 @@
 </div>
 <div id="buttons" class="span-24 last">
 <ul class="button-set span-2">
-  <li><button id="back-button" disabled="disabled" class="big-button span-2">&laquo;</button></li>
+  <li><button id="previous-button" disabled="disabled" class="big-button span-2">&laquo;</button></li>
 </ul>
 <ul id="answer-see-more" class="button-set span-20 last">
   <li><button id="answer-button" class="big-button">Answer</button></li>
 </ul>
 <ul class="button-set span-2 last">
-  <li><button id="skip-button" class="big-button span-2">&raquo;</button></li>
+  <li><button id="next-button" class="big-button span-2">&raquo;</button></li>
 </ul>
 </div>
 <div id="spacer"></div>
+</div>
 <% content_for :scripts do %>
 <%= javascript_include_tag 'prompt' %>
+<%= javascript_include_tag 'indelible-me' %>
 <%= javascript_include_tag 'jquery.autoresize' %>
 <script type="text/javascript">
 $(function() {
-  var prompts = <%= @prompts.shuffle.to_json %>
+  window.Prompts.refresh(<%= @prompts.shuffle.to_json %>);
+  window.App.render();
   var currentIndex = 0
   var showPrompt = function(index) {
     // First clear the answer box since we're switching questions.
@@ -74,7 +78,7 @@ $(function() {
     $('#answer-pane form').attr('action', '/prompts/' + prompt.id + '/answer');
   };
   var questionPadding = 0;
-  showPrompt(currentIndex);
+//  showPrompt(currentIndex);
   $('#answer-button').click(function() {
     $('#buttons').fadeOut(100, function() {
       questionPadding = $('#question').css('padding-top');
