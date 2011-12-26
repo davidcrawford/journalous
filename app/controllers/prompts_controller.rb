@@ -28,8 +28,13 @@ class PromptsController < ApplicationController
   end
   
   def answered
+    user = current_user
+    if (params[:user_id]) then
+      user = User.find(params[:user_id])
+    end
+    
     @title = "Your Answers"
-    get_prompt_lists
+    get_prompt_lists user
     
     respond_to do |format|
       format.html # index.html.erb
@@ -128,12 +133,12 @@ class PromptsController < ApplicationController
   
   private
   
-  def get_prompt_lists
+  def get_prompt_lists(user = current_user)
     @prompts = Prompt.all
     
     @answered = {}
     @prompts.each do |prompt|
-      answer = current_user.answer_for prompt
+      answer = user.answer_for prompt
       if !answer.nil?
         @answered[prompt] = answer
       end

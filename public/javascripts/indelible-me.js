@@ -100,5 +100,6 @@ $(function() {
       }
     }
   });
+
   window.App = new PromptListView;
 });

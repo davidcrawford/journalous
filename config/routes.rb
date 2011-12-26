@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.dad '/dad', :controller => 'invites', :action => 'show', :id => '562b9398f1a50bbb3fb522ed62c266cf'
   map.delete_answer '/answers/:id', :controller => 'answers', :action => 'delete', :conditions => { :method => :delete }
   map.add_email '/users/email', :controller => 'users', :action => 'email'
-  map.your_answers '/prompts/answered', :controller => 'prompts', :action => 'answered'
+  map.your_answers '/prompts/answered/:user_id', :controller => 'prompts', :action => 'answered', :user_id => nil
   map.prompt_list '/prompts/list', :controller => 'prompts', :action => 'list'
   map.resources :prompts
   map.resources :users
